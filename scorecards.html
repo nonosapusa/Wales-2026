@@ -1398,8 +1398,20 @@ function loadSavedOrder(){
         courses[ci].blockOrder=o;
         courses[ci+3].blockOrder=o;
       });
+    } else {
+      // No saved order â€” sync courses 3-5 to match 0-2 by default
+      [0,1,2].forEach(ci=>{
+        workbookPlayerOrders[ci+3]=workbookPlayerOrders[ci];
+        courses[ci+3].blockOrder=workbookPlayerOrders[ci];
+      });
     }
-  }catch(e){}
+  }catch(e){
+    // On error, still sync courses 3-5
+    [0,1,2].forEach(ci=>{
+      workbookPlayerOrders[ci+3]=workbookPlayerOrders[ci];
+      courses[ci+3].blockOrder=workbookPlayerOrders[ci];
+    });
+  }
 }
 function buildOrderPanel(){
   const container=document.getElementById("orderRows");
