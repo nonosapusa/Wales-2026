@@ -30,7 +30,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .course-pane{display:none;padding:22px}.course-pane.active{display:block}.course-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.course-head h3{margin:0;font-family:"Playfair Display",serif;font-size:1.8rem;color:#153c30}.course-meta{color:#66746e;font-size:.9rem}.excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
 .score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table td:not(.label){width:52px;min-width:52px;}.hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}.hole-table th{background:#153c30;color:#fff;font-size:.78rem}.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}.hole-table .info-row td{background:#eef2ef;font-weight:700}.hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}.hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}.round-total{font-weight:900;color:#153c30;background:#f5ebd3}
 .score-eagle input{border-radius:50%;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;background:#dceee3;}
-.score-birdie input{border-radius:50%;border:2px solid #153c30;}
+.score-birdie input{border-radius:50%;border:2px solid red;}
 .score-bogey input{border-radius:3px;border:2px solid #153c30;}
 .score-double input{border-radius:3px;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}.summary-block h3{margin:0 0 5px;color:#153c30}.summary-help{margin:0 0 14px;color:#69736f;font-size:.9rem}.summary-table{width:100%;border-collapse:collapse}.summary-table th,.summary-table td{padding:12px;border-bottom:1px solid #ded6c5;text-align:center}.summary-table th{background:#153c30;color:#fff}.summary-table td:first-child,.summary-table th:first-child{text-align:left}.summary-value{font-weight:900;color:#153c30}.zero-value{color:#9aa39f}
@@ -65,7 +65,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .team-stroke-hole{background:#dceee3;}.team-stroke-hole2{background:#a8d4b8;}
 .round-total{font-weight:900;color:#153c30;background:#f5ebd3}
 .score-eagle input{border-radius:50%;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;background:#dceee3;}
-.score-birdie input{border-radius:50%;border:2px solid #153c30;}
+.score-birdie input{border-radius:50%;border:2px solid red;}
 .score-bogey input{border-radius:3px;border:2px solid #153c30;}
 .score-double input{border-radius:3px;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}
@@ -102,6 +102,15 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .hcp-field input{width:72px;padding:7px 10px;border:1px solid #becbc4;border-radius:8px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;text-align:center;-webkit-appearance:none;touch-action:manipulation;}
 .hcp-field input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e;}
 .hcp-field small{font-size:.72rem;color:#68766f;text-align:center;}
+.order-panel{background:#f0f5f1;border-bottom:1px solid #d0dcd4;padding:16px 22px;}
+.order-panel-title{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c7a45d;margin-bottom:12px;}
+.order-rows{display:flex;flex-direction:column;gap:10px;}
+.order-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.order-row-label{font-size:.75rem;font-weight:800;color:#153c30;min-width:90px;}
+.order-sel{padding:6px 8px;border:1px solid #becbc4;border-radius:8px;font:inherit;font-size:.85rem;font-weight:700;color:#153c30;background:#fff;-webkit-appearance:none;touch-action:manipulation;cursor:pointer;}
+.order-sel:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e;}
+.order-team-sep{font-size:.75rem;color:#68766f;font-weight:600;padding:0 2px;}
+.order-note{font-size:.72rem;color:#68766f;margin-top:8px;}
 .tee-section{background:#eaf0ec;border-bottom:1px solid #d0dcd4;padding:16px 22px;}
 .tee-section-title{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c7a45d;margin-bottom:12px;}
 .tee-table{border-collapse:collapse;width:100%;max-width:520px;font-size:.82rem;}
@@ -1202,7 +1211,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
   <div class="hcp-panel-title">Handicap Index</div>
   <div class="hcp-inputs" id="hcpInputs"></div>
 </div>
-<div class="score-tabs" id="scoreTabs"></div><div id="coursePanes"></div></div>
+<div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div></div><div class="score-tabs" id="scoreTabs"></div><div id="coursePanes"></div></div>
 <div class="trip-summary">
 <h3>Leaderboard</h3>
 <p>Automatically accumulated round by round in the same order as the Excel summary worksheets.</p>
@@ -1347,6 +1356,68 @@ window.changeTee=function(ci,teeNum){
   refreshHcpHints();
   update();
 };
+const allPlayers=["Falk","Norbert","Jogi","Stefan"];
+const orderStorageKey="wales2026PlayerOrder";
+function loadSavedOrder(){
+  try{
+    const saved=JSON.parse(localStorage.getItem(orderStorageKey)||"null");
+    if(saved&&saved.length===3&&saved.every(o=>o.length===4)){
+      saved.forEach((o,ci)=>{
+        workbookPlayerOrders[ci]=o;
+        workbookPlayerOrders[ci+3]=o;
+        courses[ci].blockOrder=o;
+        courses[ci+3].blockOrder=o;
+      });
+    }
+  }catch(e){}
+}
+function buildOrderPanel(){
+  const container=document.getElementById("orderRows");
+  if(!container)return;
+  container.innerHTML="";
+  const courseNames=["North Wales","Bull Bay","Conwy"];
+  courseNames.forEach((name,ci)=>{
+    const row=document.createElement("div");
+    row.className="order-row";
+    const lbl=document.createElement("span");
+    lbl.className="order-row-label";
+    lbl.textContent=name+":";
+    row.appendChild(lbl);
+    for(let pos=0;pos<4;pos++){
+      if(pos===2){const sep=document.createElement("span");sep.className="order-team-sep";sep.textContent="vs";row.appendChild(sep);}
+      const sel=document.createElement("select");
+      sel.className="order-sel";
+      sel.dataset.ci=ci;
+      sel.dataset.pos=pos;
+      allPlayers.forEach(p=>{
+        const opt=document.createElement("option");
+        opt.value=p;opt.textContent=p;
+        if(workbookPlayerOrders[ci][pos]===p)opt.selected=true;
+        sel.appendChild(opt);
+      });
+      sel.addEventListener("change",function(){applyOrder(ci);});
+      row.appendChild(sel);
+    }
+    container.appendChild(row);
+  });
+}
+function applyOrder(ci){
+  const sels=document.querySelectorAll(".order-sel[data-ci='"+ci+"']");
+  const newOrder=Array.from(sels).map(s=>s.value);
+  workbookPlayerOrders[ci]=newOrder;
+  workbookPlayerOrders[ci+3]=newOrder;
+  courses[ci].blockOrder=newOrder;
+  courses[ci+3].blockOrder=newOrder;
+  // Save to localStorage
+  const saved=[0,1,2].map(i=>workbookPlayerOrders[i]);
+  localStorage.setItem(orderStorageKey,JSON.stringify(saved));
+  rebuildChcs();
+  // Rebuild both affected panes
+  window.changeTee(ci,courses[ci].selectedTee);
+  window.changeTee(ci+3,courses[ci+3].selectedTee);
+  refreshHcpHints();
+  update();
+}
 function rebuildChcs(){
   courses.forEach((c,ci)=>{
     c.players.forEach(p=>{
@@ -1718,9 +1789,11 @@ window.downloadWorkbookWithScores=function(){
   }
 };
 
+loadSavedOrder();
 rebuildChcs();
 build();
 buildHcpPanel();
+buildOrderPanel();
 window._scoringReady=true;
 
 // Register Firebase real-time listeners (inside IIFE so all functions are in scope)
