@@ -28,7 +28,12 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
 .score-tabs{display:flex;gap:8px;overflow-x:auto;padding:14px;background:#eaf0ec;-webkit-overflow-scrolling:touch;scrollbar-width:none;mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);}.score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}.score-tab.active{background:#c8a65e;color:#102a22}
 .course-pane{display:none;padding:22px}.course-pane.active{display:block}.course-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.course-head h3{margin:0;font-family:"Playfair Display",serif;font-size:1.8rem;color:#153c30}.course-meta{color:#66746e;font-size:.9rem}.excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
-.score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table td:not(.label){width:52px;min-width:52px;}.hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}.hole-table th{background:#153c30;color:#fff;font-size:.78rem}.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}.hole-table .info-row td{background:#eef2ef;font-weight:700}.hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}.hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}.round-total{font-weight:900;color:#153c30;background:#f5ebd3}
+.score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}.hole-table{border-collapse:collapse;width:100%;}.hole-table td:not(.label){min-width:52px;}.hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}.hole-table th{background:#153c30;color:#fff;font-size:.78rem}.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:60px;font-weight:800;color:#153c30}
+.hole-num{text-align:center !important;min-width:40px !important;}
+.hole-par{text-align:center;font-weight:700;color:#153c30;}
+.hole-si{text-align:center;color:#68766f;font-size:.78rem;}
+.subtotal-row td{background:#f5ebd3;font-weight:900;color:#153c30;}
+.gross-row td{background:#ebd9a0;}.hole-table .info-row td{background:#eef2ef;font-weight:700}.hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}.hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}.round-total{font-weight:900;color:#153c30;background:#f5ebd3}
 .score-eagle input{border-radius:50%;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;background:#dceee3;}
 .score-birdie input{border-radius:50%;border:2px solid red;}
 .score-bogey input{border-radius:3px;border:2px solid #153c30;}
@@ -54,10 +59,15 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .course-meta{color:#66746e;font-size:.9rem}
 .excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
 .score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}
-.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table td:not(.label){width:52px;min-width:52px;}
+.hole-table{border-collapse:collapse;width:100%;}.hole-table td:not(.label){min-width:52px;}
 .hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}
 .hole-table th{background:#153c30;color:#fff;font-size:.78rem}
-.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}
+.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:60px;font-weight:800;color:#153c30}
+.hole-num{text-align:center !important;min-width:40px !important;}
+.hole-par{text-align:center;font-weight:700;color:#153c30;}
+.hole-si{text-align:center;color:#68766f;font-size:.78rem;}
+.subtotal-row td{background:#f5ebd3;font-weight:900;color:#153c30;}
+.gross-row td{background:#ebd9a0;}
 .hole-table .info-row td{background:#eef2ef;font-weight:700}
 .hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 .hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}
@@ -1318,28 +1328,31 @@ window.changeTee=function(ci,teeNum){
   th+='</select></div></div>';
   let h='<div class="course-head"><div><h3>'+c.course+'</h3><div class="course-meta">Par '+c.pars.reduce((a,b)=>a+b,0)+' \u00b7 Workbook player order: '+teamText+mirrorNote+'</div></div><button class="excel-link" type="button" onclick="window.downloadWorkbookWithScores()">Download workbook with entered scores</button></div>';
   h+=th;
-  h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Golfer / Hole</th>'+c.pars.map((_,i)=>'<th>'+(i+1)+'</th>').join('')+'<th>Out</th><th>In</th><th>Gross</th></tr></thead><tbody>';
-  h+='<tr class="info-row"><td class="label">Par</td>'+c.pars.map(x=>'<td>'+x+'</td>').join('')+'<td>'+c.pars.slice(0,9).reduce((a,b)=>a+b,0)+'</td><td>'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td>'+c.pars.reduce((a,b)=>a+b,0)+'</td></tr>';
-  h+='<tr class="info-row"><td class="label">Stroke index</td>'+c.sis.map(x=>'<td>'+x+'</td>').join('')+'<td>\u2014</td><td>\u2014</td><td>\u2014</td></tr>';
-  workbookPlayerOrders[ci].forEach(name=>{
-    const p=playerInfo(c,name);
-    let teamAdj=null;
-    if(ci<3){const b=c.blockOrder;const tA=[b[0],b[1]],tB=[b[2],b[3]];const hA=teamHandicap(playerInfo(c,tA[0]).chc,playerInfo(c,tA[1]).chc);const hB=teamHandicap(playerInfo(c,tB[0]).chc,playerInfo(c,tB[1]).chc);teamAdj=tA.includes(name)?(hA-Math.min(hA,hB)):(hB-Math.min(hA,hB));}
-    h+='<tr><td class="label" id="lbl-'+ci+'-'+name+'">'+name+'<br><small>HI '+p.index.toFixed(1)+' \u00b7 CHC '+p.chc+'</small></td>';
-    for(let hi=0;hi<18;hi++){
+  h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  for(let hi=0;hi<18;hi++){
+    h+='<tr><td class="label hole-num">'+(hi+1)+'</td><td class="hole-par">'+c.pars[hi]+'</td><td class="hole-si">'+c.sis[hi]+'</td>';
+    workbookPlayerOrders[ci].forEach(function(name){
+      const p=playerInfo(c,name);
       const k=key(ci,name,hi);
       const mirrorSource=mirroredSourceName(ci,name);
       const isMirrored=ci<3&&mirrorSource!==name;
       const displayed=isMirrored?(scores[key(ci,mirrorSource,hi)]??""):(scores[k]??"");
       const strokes=allocatedStrokes(p.chc,c.sis[hi]);
-      const tStrokes=teamAdj!==null?allocatedStrokes(teamAdj,c.sis[hi]):0;
+      const tAdj=teamAdjs[name];
+      const tStrokes=tAdj!==null?allocatedStrokes(tAdj,c.sis[hi]):0;
       let cls='';
       if(ci<3&&tStrokes>0)cls=tStrokes>1?'team-stroke-hole2':'team-stroke-hole';
       else if(ci>=3){if(strokes>1)cls='team-stroke-hole2';else if(strokes>0)cls='team-stroke-hole';}
       h+='<td'+(cls?' class="'+cls+'"':'')+'><input class="hole-input'+(isMirrored?' mirrored-input':'')+'" data-key="'+k+'" data-ci="'+ci+'" data-name="'+name+'" data-hi="'+hi+'" type="number" min="1" max="20" inputmode="numeric" value="'+displayed+'" '+(isMirrored?'readonly title="Copied automatically from '+mirrorSource+'"':'')+'/></td>';
-    }
-    h+='<td class="round-total" id="out-'+ci+'-'+name+'">-</td><td class="round-total" id="in-'+ci+'-'+name+'">-</td><td class="round-total" id="gross-'+ci+'-'+name+'">-</td></tr>';
-  });
+    });
+    h+='</tr>';
+  }
+  // Out row
+  h+='<tr class="subtotal-row"><td class="label">Out</td><td class="hole-par">'+c.pars.slice(0,9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="out-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
+  // In row
+  h+='<tr class="subtotal-row"><td class="label">In</td><td class="hole-par">'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="in-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
+  // Gross row
+  h+='<tr class="subtotal-row gross-row"><td class="label">Gross</td><td class="hole-par">'+c.pars.reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="gross-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='</tbody></table></div>';
   // summary block
   h+='<div class="summary-block"><h3>'+c.course+' summary</h3><p class="summary-help">Read-only results calculated from hole scores.</p><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S\'Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">Gross Out, In and Total update immediately. Points update as holes are entered.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores saved locally in this browser.</p></div>';
@@ -1627,38 +1640,35 @@ function build(){
     c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' &ndash; '+t.color+' ('+t.yards.toLocaleString()+' yds &middot; CR '+t.cr+' &middot; Slope '+t.slope+')</option>';});
     th+='</select></div></div>';
     h+=th;
-    h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Golfer / Hole</th>'+c.pars.map((_,i)=>'<th>'+(i+1)+'</th>').join("")+'<th>Out</th><th>In</th><th>Gross</th></tr></thead><tbody>';
-    h+='<tr class="info-row"><td class="label">Par</td>'+c.pars.map(x=>'<td>'+x+'</td>').join("")+'<td>'+c.pars.slice(0,9).reduce((a,b)=>a+b,0)+'</td><td>'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td>'+c.pars.reduce((a,b)=>a+b,0)+'</td></tr>';
-    h+='<tr class="info-row"><td class="label">Stroke index</td>'+c.sis.map(x=>'<td>'+x+'</td>').join("")+'<td>—</td><td>—</td><td>—</td></tr>';
-
-    workbookPlayerOrders[ci].forEach(name=>{
-      const p=playerInfo(c,name);
-      let teamAdj=null;
-      if(ci<3){
-        const b=c.blockOrder;
-        const tA=[b[0],b[1]],tB=[b[2],b[3]];
-        const hA=teamHandicap(playerInfo(c,tA[0]).chc,playerInfo(c,tA[1]).chc);
-        const hB=teamHandicap(playerInfo(c,tB[0]).chc,playerInfo(c,tB[1]).chc);
-        teamAdj=tA.includes(name)?(hA-Math.min(hA,hB)):(hB-Math.min(hA,hB));
-      }
-      h+='<tr><td class="label" id="lbl-'+ci+'-'+name+'">'+name+'<br><small>HI '+p.index.toFixed(1)+' · CHC '+p.chc+'</small></td>';
-      for(let hi=0;hi<18;hi++){
-        const k=key(ci,name,hi);
-        const mirrorSource=mirroredSourceName(ci,name);
-        const isMirrored=ci<3 && mirrorSource!==name;
-        const displayed=isMirrored ? (scores[key(ci,mirrorSource,hi)]??"") : (scores[k]??"");
-        const strokes=allocatedStrokes(p.chc,c.sis[hi]);
-        const tStrokes=teamAdj!==null?allocatedStrokes(teamAdj,c.sis[hi]):0;
-        let cls='';
-        if(ci<3&&tStrokes>0) cls=tStrokes>1?'team-stroke-hole2':'team-stroke-hole';
-        else if(ci>=3){if(strokes>1)cls='team-stroke-hole2';else if(strokes>0)cls='team-stroke-hole';}
-        h+='<td'+(cls?' class="'+cls+'"':'')+'><input class="hole-input'+(isMirrored?" mirrored-input":"")+'" data-key="'+k+'" data-ci="'+ci+'" data-name="'+name+'" data-hi="'+hi+'" type="number" min="1" max="20" inputmode="numeric" value="'+displayed+'" '+(isMirrored?'readonly title="Copied automatically from '+mirrorSource+'"':'')+'></td>';
-      }
-      h+='<td class="round-total" id="out-'+ci+'-'+name+'">—</td><td class="round-total" id="in-'+ci+'-'+name+'">—</td><td class="round-total" id="gross-'+ci+'-'+name+'">—</td></tr>';
+    h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  var tAdjs2={};
+  workbookPlayerOrders[ci].forEach(function(nm){
+    if(ci<3){const b=c.blockOrder;const tA=[b[0],b[1]],tB=[b[2],b[3]];const hA=teamHandicap(playerInfo(c,tA[0]).chc,playerInfo(c,tA[1]).chc);const hB=teamHandicap(playerInfo(c,tB[0]).chc,playerInfo(c,tB[1]).chc);tAdjs2[nm]=tA.includes(nm)?(hA-Math.min(hA,hB)):(hB-Math.min(hA,hB));}
+    else{tAdjs2[nm]=null;}
+  });
+  for(let hi2=0;hi2<18;hi2++){
+    h+='<tr><td class="label hole-num">'+(hi2+1)+'</td><td class="hole-par">'+c.pars[hi2]+'</td><td class="hole-si">'+c.sis[hi2]+'</td>';
+    workbookPlayerOrders[ci].forEach(function(nm){
+      const p2=playerInfo(c,nm);
+      const k2=key(ci,nm,hi2);
+      const ms=mirroredSourceName(ci,nm);
+      const isMir=ci<3&&ms!==nm;
+      const disp=isMir?(scores[key(ci,ms,hi2)]??""):(scores[k2]??"");
+      const str=allocatedStrokes(p2.chc,c.sis[hi2]);
+      const tAdj2=tAdjs2[nm];
+      const tStr=tAdj2!==null?allocatedStrokes(tAdj2,c.sis[hi2]):0;
+      let cls2='';
+      if(ci<3&&tStr>0)cls2=tStr>1?'team-stroke-hole2':'team-stroke-hole';
+      else if(ci>=3){if(str>1)cls2='team-stroke-hole2';else if(str>0)cls2='team-stroke-hole';}
+      h+='<td'+(cls2?' class="'+cls2+'"':'')+'><input class="hole-input'+(isMir?' mirrored-input':'')+'" data-key="'+k2+'" data-ci="'+ci+'" data-name="'+nm+'" data-hi="'+hi2+'" type="number" min="1" max="20" inputmode="numeric" value="'+disp+'" '+(isMir?'readonly title="Copied automatically from '+ms+'"':'')+'/></td>';
     });
-
-    h+='</tbody></table></div>';
-    h+='<div class="summary-block"><h3>'+c.course+' summary</h3><p class="summary-help">Read-only results calculated directly from the hole scores. For North Wales, Bull Bay and Conwy, Player 2 automatically uses Player 1’s hole scores and Player 4 automatically uses Player 3’s.</p><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">A round is added to the official summary after all four golfers have entered all 18 holes. Gross Out, In and Total update immediately.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores are saved locally in this browser. The download button creates a new Excel workbook containing the scores currently entered on this device. Excel recalculates the workbook formulas when the downloaded file is opened.</p></div>';
+    h+='</tr>';
+  }
+  h+='<tr class="subtotal-row"><td class="label">Out</td><td class="hole-par">'+c.pars.slice(0,9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="out-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
+  h+='<tr class="subtotal-row"><td class="label">In</td><td class="hole-par">'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="in-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
+  h+='<tr class="subtotal-row gross-row"><td class="label">Gross</td><td class="hole-par">'+c.pars.reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="gross-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
+  h+='</tbody></table></div>';
+h+='<div class="summary-block"><h3>'+c.course+' summary</h3><p class="summary-help">Read-only results calculated directly from the hole scores. For North Wales, Bull Bay and Conwy, Player 2 automatically uses Player 1’s hole scores and Player 4 automatically uses Player 3’s.</p><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">A round is added to the official summary after all four golfers have entered all 18 holes. Gross Out, In and Total update immediately.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores are saved locally in this browser. The download button creates a new Excel workbook containing the scores currently entered on this device. Excel recalculates the workbook formulas when the downloaded file is opened.</p></div>';
     pane.innerHTML=h;
     panes.appendChild(pane);
   });
