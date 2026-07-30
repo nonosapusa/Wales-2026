@@ -28,7 +28,11 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
 .score-tabs{display:flex;gap:8px;overflow-x:auto;padding:14px;background:#eaf0ec}.score-tab{border:0;border-radius:999px;padding:10px 15px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}.score-tab.active{background:#c8a65e;color:#102a22}
 .course-pane{display:none;padding:22px}.course-pane.active{display:block}.course-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.course-head h3{margin:0;font-family:"Playfair Display",serif;font-size:1.8rem;color:#153c30}.course-meta{color:#66746e;font-size:.9rem}.excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
-.score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table th,.hole-table td{padding:8px 6px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center}.hole-table th{background:#153c30;color:#fff;font-size:.78rem}.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}.hole-table .info-row td{background:#eef2ef;font-weight:700}.hole-input{width:48px;padding:7px 4px;text-align:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;touch-action:manipulation;}.hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}.round-total{font-weight:900;color:#153c30;background:#f5ebd3}
+.score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table td:not(.label){width:52px;min-width:52px;}.hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}.hole-table th{background:#153c30;color:#fff;font-size:.78rem}.hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}.hole-table .info-row td{background:#eef2ef;font-weight:700}.hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}.hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}.round-total{font-weight:900;color:#153c30;background:#f5ebd3}
+.score-eagle input{border-radius:50%;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;background:#dceee3;}
+.score-birdie input{border-radius:50%;border:2px solid #153c30;}
+.score-bogey input{border-radius:3px;border:2px solid #153c30;}
+.score-double input{border-radius:3px;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}.summary-block h3{margin:0 0 5px;color:#153c30}.summary-help{margin:0 0 14px;color:#69736f;font-size:.9rem}.summary-table{width:100%;border-collapse:collapse}.summary-table th,.summary-table td{padding:12px;border-bottom:1px solid #ded6c5;text-align:center}.summary-table th{background:#153c30;color:#fff}.summary-table td:first-child,.summary-table th:first-child{text-align:left}.summary-value{font-weight:900;color:#153c30}.zero-value{color:#9aa39f}
 .trip-summary{margin-top:26px;background:#fff;border-radius:20px;padding:22px;color:#17221e}.trip-summary h3{margin:0 0 5px;color:#153c30;font-family:"Playfair Display",serif;font-size:1.7rem}.trip-summary p{margin:0 0 15px;color:#68736f}.trip-summary table{width:100%;border-collapse:collapse}.trip-summary th,.trip-summary td{padding:12px;border-bottom:1px solid #e0e5e1;text-align:center}.trip-summary th{background:#153c30;color:#fff}.trip-summary td:first-child,.trip-summary th:first-child{text-align:left}.winner{background:#fff7df;font-weight:900}
 .score-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.score-btn{border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;touch-action:manipulation;}.save-btn{background:#153c30;color:#fff}.clear-btn{background:#e9ece9;color:#26342f}.score-note{font-size:.88rem;color:#64716b;margin-top:12px}
@@ -50,16 +54,20 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .course-meta{color:#66746e;font-size:.9rem}
 .excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
 .score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}
-.hole-table{border-collapse:collapse;min-width:1160px;width:100%}
-.hole-table th,.hole-table td{padding:8px 6px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center}
+.hole-table{border-collapse:collapse;min-width:1160px;width:100%}.hole-table td:not(.label){width:52px;min-width:52px;}
+.hole-table th,.hole-table td{padding:2px;border-right:1px solid #e2e7e4;border-bottom:1px solid #e2e7e4;text-align:center;vertical-align:middle}
 .hole-table th{background:#153c30;color:#fff;font-size:.78rem}
 .hole-table .label{text-align:left;position:sticky;left:0;background:#f3f6f4;z-index:2;min-width:138px;font-weight:800;color:#153c30}
 .hole-table .info-row td{background:#eef2ef;font-weight:700}
-.hole-input{width:48px;padding:7px 4px;text-align:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;touch-action:manipulation;}
+.hole-input{width:100%;padding:7px 0;text-align:center;text-align-last:center;border:1px solid #becbc4;border-radius:7px;font-weight:700;font-size:16px;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}.hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 .hole-input:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e}.mirrored-input{background:#eef2ef;color:#5f6d67;cursor:not-allowed}
 .stroke-hole{background:#fdf3dc;}
 .team-stroke-hole{background:#dceee3;}.team-stroke-hole2{background:#a8d4b8;}
 .round-total{font-weight:900;color:#153c30;background:#f5ebd3}
+.score-eagle input{border-radius:50%;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;background:#dceee3;}
+.score-birdie input{border-radius:50%;border:2px solid #153c30;}
+.score-bogey input{border-radius:3px;border:2px solid #153c30;}
+.score-double input{border-radius:3px;border:2px solid #153c30;box-shadow:0 0 0 3px #153c30;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}
 .summary-block h3{margin:0 0 5px;color:#153c30}
 .summary-help{margin:0 0 14px;color:#69736f;font-size:.9rem}
@@ -1601,7 +1609,8 @@ function update(){
     for(let h=0;h<18;h++){
       const x=effectiveScore(ci,name,h);
       if(x!==null){count++;if(h<9)out+=x;else inside+=x}
-    }
+      const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+name+'"][data-hi="'+h+'"]');
+      if(inp){const td=inp.closest("td");td.classList.remove("score-eagle","score-birdie","score-bogey","score-double");if(x!==null){const diff=x-c.pars[h];if(diff<=-2)td.classList.add("score-eagle");else if(diff===-1)td.classList.add("score-birdie");else if(diff===1)td.classList.add("score-bogey");else if(diff>=2)td.classList.add("score-double");}}}
     document.getElementById("out-"+ci+"-"+name).textContent=count?out:"—";
     document.getElementById("in-"+ci+"-"+name).textContent=count?inside:"—";
     document.getElementById("gross-"+ci+"-"+name).textContent=count?out+inside:"—";
