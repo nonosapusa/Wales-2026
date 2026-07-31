@@ -42,7 +42,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .hole-table .hole-num{background:var(--sc-ink);color:#F1ECDF;font-weight:600;width:40px;}
 .subtotal-row td,.subtotal-row th{background:var(--sc-ink);color:#F1ECDF;font-weight:600;letter-spacing:.06em;}
 .running-summary td,.running-summary th{background:#f0f7f2;font-size:.75rem;font-weight:700;color:#153c30;border-bottom:2px solid var(--sc-rule);}
-.run-pts{font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:800;color:var(--sc-ink);}.run-total .run-pts,.run-total th.run-pts,.run-total .run-label{font-weight:900;text-decoration:underline;}.run-leader .run-pts,.run-leader th.run-pts{font-weight:900;color:#B3261E;}.run-leader .run-label{font-weight:900;color:#B3261E;}
+.run-pts{font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:800;color:var(--sc-ink);}.run-leader .run-label{font-weight:900;text-decoration:underline;}.run-leader td,.run-leader th:not(.run-label){background:#c8ecd4 !important;}.run-leader .run-pts,.run-leader th.run-pts{font-weight:900;color:#B3261E;}.run-leader .run-label{font-weight:900;color:#153c30;}.run-leader-top{background:#c8ecd4 !important;color:#1565c0 !important;border-radius:4px;}
 .run-label{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sc-muted);}
 .gross-row td,.gross-row th{background:var(--sc-ink);font-weight:700;}
 .sc{position:relative;padding:0;min-width:58px;overflow:visible;}
@@ -1748,7 +1748,8 @@ function update(){
   var allN2=workbookPlayerOrders.flat().filter(function(n,i,a){return a.indexOf(n)===i;});
   var cum2={};allN2.forEach(function(n){cum2[n]=0;});
   courses.forEach(function(crs3,ci3){var r3=calculateCourse(ci3);workbookPlayerOrders[ci3].forEach(function(n){cum2[n]+=(r3[n].scramble||0)+(r3[n].sford||0)+(r3[n].highlow||0);});});
-  courses.forEach(function(crs3,ci3){workbookPlayerOrders[ci3].forEach(function(n){var el=document.getElementById('run-ldr-'+ci3+'-'+n);if(el)el.textContent=cum2[n]>0?cum2[n]:'-';});});
+  var maxCum2=Math.max.apply(null,allN2.map(function(n){return cum2[n];}));
+  courses.forEach(function(crs3,ci3){workbookPlayerOrders[ci3].forEach(function(n){var el=document.getElementById('run-ldr-'+ci3+'-'+n);if(el){var diff=cum2[n]-maxCum2;el.textContent=maxCum2>0?(diff===0?cum2[n]:diff+' ('+cum2[n]+')'):'-';el.classList.toggle('run-leader-top',maxCum2>0&&cum2[n]===maxCum2);}});});
 
   const allNames=workbookPlayerOrders.flat().filter((n,i,a)=>a.indexOf(n)===i); const cumulative=Object.fromEntries(allNames.map(n=>[n,{total:0,scramble:0,sford:0,highlow:0}]));
 
