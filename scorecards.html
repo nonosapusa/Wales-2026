@@ -29,7 +29,11 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 
 .auto-score-section{background:#0b3026;color:#fff}.auto-score-section h2{color:#fff}.auto-score-section .eyebrow{color:#d9bd7b}.auto-score-intro{max-width:900px;color:#d9e4df}
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
-.course-select-wrap{padding:16px 22px;background:#eaf0ec;border-bottom:1px solid #d0dcd4;}
+.course-select-wrap{padding:14px 22px;background:var(--sc-stock);border-bottom:1px solid var(--sc-rule);}
+#scoreTabs,#scoreTabs option{background:#FBF7EF !important;color:#153c30 !important;}
+#scoreTabs{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:600;border:none;cursor:pointer;width:100%;padding:4px 0;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center;padding-right:28px;}
+.course-select-wrap{padding:18px 22px 0 22px;background:var(--sc-stock);border-bottom:none;}
+.course-head{padding:0 22px 14px 22px;background:var(--sc-stock);border-bottom:1px solid var(--sc-rule);min-height:0;}
 #scoreTabs{width:100%;padding:12px 14px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;border:1px solid #becbc4;border-radius:10px;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:manipulation;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
 #scoreTabs:focus{outline:2px solid var(--sc-ink);outline-offset:-2px;}.score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}.score-tab.active{background:#c8a65e;color:#102a22}
 .course-pane{display:none;padding:22px}.course-pane.active{display:block}.course-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.course-head h3{margin:0;font-family:"Playfair Display",serif;font-size:1.8rem;color:#153c30}.course-meta{color:#66746e;font-size:.9rem}.excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
@@ -70,7 +74,11 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .exact-score-section .eyebrow{color:#d9bd7b}
 .exact-score-intro{max-width:920px;color:#d9e4df}
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
-.course-select-wrap{padding:16px 22px;background:#eaf0ec;border-bottom:1px solid #d0dcd4;}
+.course-select-wrap{padding:14px 22px;background:var(--sc-stock);border-bottom:1px solid var(--sc-rule);}
+#scoreTabs,#scoreTabs option{background:#FBF7EF !important;color:#153c30 !important;}
+#scoreTabs{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:600;border:none;cursor:pointer;width:100%;padding:4px 0;-webkit-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 0 center;padding-right:28px;}
+.course-select-wrap{padding:18px 22px 0 22px;background:var(--sc-stock);border-bottom:none;}
+.course-head{padding:0 22px 14px 22px;background:var(--sc-stock);border-bottom:1px solid var(--sc-rule);min-height:0;}
 #scoreTabs{width:100%;padding:12px 14px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;border:1px solid #becbc4;border-radius:10px;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:manipulation;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
 #scoreTabs:focus{outline:2px solid var(--sc-ink);outline-offset:-2px;}
 .score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}
@@ -1259,7 +1267,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div></div><div class="course-select-wrap"><label for="scoreTabs" style="display:block;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#153c30;margin-bottom:8px;">Select Golf Course</label><select id="scoreTabs" onchange="window.showCourseFromSelect(this.value)"></select></div><div id="coursePanes"></div></div>
 <div class="trip-summary">
 <h3>Leaderboard</h3>
-<p>Automatically accumulated round by round in the same order as the Excel summary worksheets.</p>
+
 <div class="score-table-wrap" style="overflow-x:auto;"><table><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S'Ford</th><th>High/Low</th></tr></thead><tbody id="tripSummaryBody"></tbody></table></div>
 </div>
 </div>
@@ -1349,11 +1357,11 @@ window.changeTee=function(ci,teeNum){
     th+='<tr class="'+(active?'active-tee':'')+'"><td>'+t.n+'</td><td>'+dot+t.color+'</td><td>'+t.yards.toLocaleString()+'</td><td>'+t.cr+'</td><td>'+t.slope+'</td></tr>';
   });
   th+='</tbody></table>';
-  th+='<div class="tee-selector"><label>Tee # for handicap &amp; scorecard:</label>';
+  th+='<div class="tee-selector"><label>Tee Box:</label>';
   th+='<select id="teesel-'+ci+'" onchange="window.changeTee('+ci+',Number(this.value))">';
   c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' \u2013 '+t.color+' ('+t.yards.toLocaleString()+' yds \u00b7 CR '+t.cr+' \u00b7 Slope '+t.slope+')</option>';});
   th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
-  let h='<div class="course-head"><div><h3>'+c.course+'</h3><div class="course-meta">Par '+c.pars.reduce((a,b)=>a+b,0)+' \u00b7 Workbook player order: '+teamText+mirrorNote+'</div></div><button class="excel-link" type="button" onclick="window.downloadWorkbookWithScores()">Download workbook with entered scores</button></div>';
+  let h='<div class="course-head"></div>';
   h+=th;
   h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
   
@@ -1383,7 +1391,7 @@ window.changeTee=function(ci,teeNum){
   h+='<tr class="subtotal-row gross-row"><td class="label">Gross</td><td class="hole-par">'+c.pars.reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="gross-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='</tbody></table></div>';
   // summary block
-  h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S\'Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">Gross Out, In and Total update immediately. Points update as holes are entered.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores saved locally in this browser.</p></div>';
+  h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S\'Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">Gross Out, In and Total update immediately. Points update as holes are entered.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn save-btn" type="button" onclick="window.downloadWorkbookWithScores()">Download Excel</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores saved locally in this browser.</p></div>';
   newPane.innerHTML=h;
   panes.replaceChild(newPane,pane);
   // re-attach input listeners
@@ -1401,9 +1409,11 @@ window.changeTee=function(ci,teeNum){
 const allPlayers=["Falk","Norbert","Jogi","Stefan"];
 const orderStorageKey="wales2026PlayerOrder";
 function loadSavedOrder(){
+  // Clear corrupted order data (blank player names)
+  try{const s=JSON.parse(localStorage.getItem(orderStorageKey)||"null");if(s&&s.some(o=>o.some(v=>!v))){localStorage.removeItem(orderStorageKey);}}catch(e){}
   try{
     const saved=JSON.parse(localStorage.getItem(orderStorageKey)||"null");
-    if(saved&&saved.length===3&&saved.every(o=>o.length===4)){
+    if(saved&&saved.length===3&&saved.every(o=>o.length===4&&o.every(v=>v&&v.length>0))){
       saved.forEach((o,ci)=>{
         workbookPlayerOrders[ci]=o;
         workbookPlayerOrders[ci+3]=o;
@@ -1412,10 +1422,7 @@ function loadSavedOrder(){
       });
     } else {
       // No saved order â€” sync courses 3-5 to match 0-2 by default
-      [0,1,2].forEach(ci=>{
-        workbookPlayerOrders[ci+3]=workbookPlayerOrders[ci];
-        courses[ci+3].blockOrder=workbookPlayerOrders[ci];
-      });
+      [0,1,2].forEach(ci=>{workbookPlayerOrders[ci+3]=workbookPlayerOrders[ci];courses[ci+3].blockOrder=workbookPlayerOrders[ci];});
     }
   }catch(e){
     // On error, still sync courses 3-5
@@ -1425,17 +1432,39 @@ function loadSavedOrder(){
     });
   }
 }
-function buildOrderPanel(){
+function refreshOrderSelects(ci){
+  const sels=Array.from(document.querySelectorAll(".order-sel[data-ci='"+ci+"']"));
+  const selected=sels.map(s=>s.value).filter(v=>v);
+  sels.forEach(function(sel){
+    const current=sel.value;
+    // Rebuild options: blank + players not selected elsewhere
+    while(sel.options.length>0)sel.remove(0);
+    const blank=document.createElement("option");blank.value="";blank.textContent="Select player";sel.appendChild(blank);
+    allPlayers.forEach(function(p){
+      if(p===current||selected.indexOf(p)<0){
+        const opt=document.createElement("option");
+        opt.value=p;opt.textContent=p;
+        if(p===current)opt.selected=true;
+        sel.appendChild(opt);
+      }
+    });
+  });
+}
+function buildOrderPanel(activeCi){
+  if(activeCi===undefined)activeCi=0;
   const container=document.getElementById("orderRows");
   if(!container)return;
   container.innerHTML="";
   const courseNames=["North Wales","Bull Bay","Conwy"];
-  courseNames.forEach((name,ci)=>{
+  const ci=activeCi<3?activeCi:activeCi-3;
+  const name=courseNames[ci];
+  const rows=[{name:name,ci:ci}];
+  rows.forEach(function(rowData){
     const row=document.createElement("div");
     row.className="order-row";
     const lbl=document.createElement("span");
     lbl.className="order-row-label";
-    lbl.textContent=name+":";
+    lbl.textContent=rowData.name+":";
     row.appendChild(lbl);
     // Team A (pos 0+1)
     const teamA=document.createElement("div");
@@ -1450,13 +1479,14 @@ function buildOrderPanel(){
       sel.className="order-sel";
       sel.dataset.ci=ci;
       sel.dataset.pos=pos;
+      const blankOpt=document.createElement("option");blankOpt.value="";blankOpt.textContent="Select player";sel.appendChild(blankOpt);
       allPlayers.forEach(p=>{
         const opt=document.createElement("option");
         opt.value=p;opt.textContent=p;
         if(workbookPlayerOrders[ci][pos]===p)opt.selected=true;
         sel.appendChild(opt);
       });
-      sel.addEventListener("change",function(){applyOrder(ci);});
+      sel.addEventListener("change",function(){applyOrder(ci);refreshOrderSelects(ci);});
       if(pos<2){teamA.appendChild(sel);}else{teamB.appendChild(sel);}
     }
     row.appendChild(teamA);
@@ -1468,6 +1498,21 @@ function buildOrderPanel(){
 function applyOrder(ci){
   const sels=document.querySelectorAll(".order-sel[data-ci='"+ci+"']");
   const newOrder=Array.from(sels).map(s=>s.value);
+  if(newOrder.some(v=>!v))return; // ignore if any blank
+  // Check no team pairing repeats across the 3 scramble courses
+  const newTeamA=[newOrder[0],newOrder[1]].sort().join("+");
+  const newTeamB=[newOrder[2],newOrder[3]].sort().join("+");
+  for(let oci=0;oci<3;oci++){
+    if(oci===ci)continue;
+    const o=workbookPlayerOrders[oci];
+    if(o.some(v=>!v))continue;
+    const oTeamA=[o[0],o[1]].sort().join("+");
+    const oTeamB=[o[2],o[3]].sort().join("+");
+    if(newTeamA===oTeamA||newTeamA===oTeamB||newTeamB===oTeamA||newTeamB===oTeamB){
+      alert("This team pairing already plays together in another round. Please choose a different combination.");
+      return;
+    }
+  }
   workbookPlayerOrders[ci]=newOrder;
   workbookPlayerOrders[ci+3]=newOrder;
   courses[ci].blockOrder=newOrder;
@@ -1654,7 +1699,7 @@ function showCourse(ci){
   const sel=document.getElementById("scoreTabs");
   if(sel&&Number(sel.value)!==ci)sel.value=ci;
 }
-window.showCourseFromSelect=function(val){showCourse(Number(val));};
+window.showCourseFromSelect=function(val){var n=Number(val);showCourse(n);buildOrderPanel(n);refreshOrderSelects(n<3?n:n-3);};
 function build(){
   courses.forEach((c,ci)=>{
     const tab=document.createElement("option");
@@ -1662,12 +1707,13 @@ function build(){
     tab.textContent=c.course;
     if(ci===0)tab.selected=true;
     tabs.appendChild(tab);
+    
 
     const pane=document.createElement("div");
     pane.className="course-pane"+(ci===0?" active":"");
     const teamText=c.blockOrder.join(" → "); const mirrorNote=ci<3?" · Player 2 copies Player 1; Player 4 copies Player 3":"";
 
-    let h='<div class="course-head"><div><h3>'+c.course+'</h3><div class="course-meta">Par '+c.pars.reduce((a,b)=>a+b,0)+' · Workbook player order: '+teamText+mirrorNote+'</div></div><button class="excel-link" type="button" onclick="window.downloadWorkbookWithScores()">Download workbook with entered scores</button></div>';
+    let h='<div class="course-head"></div>';
     const teeColors={'White':'#ffffff','Yellow':'#f5e642','Green':'#4caf50','Black':'#222222','Red':'#e53935','Blue':'#1e88e5'};
     let th='<div class="tee-section"><div class="tee-section-title">Tee Boxes</div>';
     th+='<table class="tee-table"><thead><tr><th>#</th><th>Color</th><th>Yards</th><th>Course Rating</th><th>Slope</th></tr></thead><tbody>';
@@ -1677,7 +1723,7 @@ function build(){
       th+='<tr class="'+(active?'active-tee':'')+'"><td>'+t.n+'</td><td>'+dot+t.color+'</td><td>'+t.yards.toLocaleString()+'</td><td>'+t.cr+'</td><td>'+t.slope+'</td></tr>';
     });
     th+='</tbody></table>';
-    th+='<div class="tee-selector"><label>Tee # for handicap &amp; scorecard:</label>';
+    th+='<div class="tee-selector"><label>Tee Box:</label>';
     th+='<select id="teesel-'+ci+'" onchange="window.changeTee('+ci+',Number(this.value))">';
     c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' &ndash; '+t.color+' ('+t.yards.toLocaleString()+' yds &middot; CR '+t.cr+' &middot; Slope '+t.slope+')</option>';});
     th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
@@ -1712,7 +1758,7 @@ function build(){
   h+='<tr class="subtotal-row"><td class="label">In</td><td class="hole-par">'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="in-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='<tr class="subtotal-row gross-row"><td class="label">Gross</td><td class="hole-par">'+c.pars.reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="gross-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='</tbody></table></div>';
-h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="formula-note">A round is added to the official summary after all four golfers have entered all 18 holes. Gross Out, In and Total update immediately.</div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div><p class="score-note">Scores are saved locally in this browser. The download button creates a new Excel workbook containing the scores currently entered on this device. Excel recalculates the workbook formulas when the downloaded file is opened.</p></div>';
+h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn save-btn" type="button" onclick="window.downloadWorkbookWithScores()">Download Excel</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div></div>';
     pane.innerHTML=h;
     panes.appendChild(pane);
   });
@@ -1857,7 +1903,7 @@ loadSavedOrder();
 rebuildChcs();
 build();
 buildHcpPanel();
-buildOrderPanel();
+buildOrderPanel(0);
 window._scoringReady=true;
 
 // Register Firebase real-time listeners (inside IIFE so all functions are in scope)
