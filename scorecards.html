@@ -27,7 +27,9 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 
 .auto-score-section{background:#0b3026;color:#fff}.auto-score-section h2{color:#fff}.auto-score-section .eyebrow{color:#d9bd7b}.auto-score-intro{max-width:900px;color:#d9e4df}
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
-.score-tabs{display:flex;gap:8px;overflow-x:auto;padding:14px;background:#eaf0ec;-webkit-overflow-scrolling:touch;scrollbar-width:none;mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);}.score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}.score-tab.active{background:#c8a65e;color:#102a22}
+.course-select-wrap{padding:16px 22px;background:#eaf0ec;border-bottom:1px solid #d0dcd4;}
+#scoreTabs{width:100%;padding:12px 14px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;border:1px solid #becbc4;border-radius:10px;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:manipulation;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
+#scoreTabs:focus{outline:2px solid var(--sc-ink);outline-offset:-2px;}.score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}.score-tab.active{background:#c8a65e;color:#102a22}
 .course-pane{display:none;padding:22px}.course-pane.active{display:block}.course-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;margin-bottom:18px}.course-head h3{margin:0;font-family:"Playfair Display",serif;font-size:1.8rem;color:#153c30}.course-meta{color:#66746e;font-size:.9rem}.excel-link{display:inline-block;border:0;cursor:pointer;font:inherit;background:#c8a65e;color:#102a22;text-decoration:none;border-radius:999px;padding:10px 16px;font-weight:800}
 .score-table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid #d9e1dc;border-radius:14px}:root{--sc-ink:#0C3B2A;--sc-ink-deep:#06231A;--sc-stock:#FBF7EF;--sc-stock2:#F3EDE0;--sc-gold:#B79A5B;--sc-pencil:#B3261E;--sc-rule:#D9D1BF;--sc-rule-soft:#EAE3D5;--sc-text:#22201B;--sc-muted:#6E6858;}.hole-table{border-collapse:collapse;width:100%;}
 .hole-table th,.hole-table td{border-right:1px solid var(--sc-rule-soft);border-bottom:1px solid var(--sc-rule-soft);text-align:center;padding:0;font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:14px;height:36px;}
@@ -64,7 +66,9 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .exact-score-section .eyebrow{color:#d9bd7b}
 .exact-score-intro{max-width:920px;color:#d9e4df}
 .score-app{margin-top:28px;background:#fff;color:#17221e;border-radius:22px;overflow:hidden;box-shadow:0 22px 55px rgba(0,0,0,.24)}
-.score-tabs{display:flex;gap:8px;overflow-x:auto;padding:14px;background:#eaf0ec;-webkit-overflow-scrolling:touch;scrollbar-width:none;mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);-webkit-mask-image:linear-gradient(to right,transparent 0,black 16px,black calc(100% - 16px),transparent 100%);}
+.course-select-wrap{padding:16px 22px;background:#eaf0ec;border-bottom:1px solid #d0dcd4;}
+#scoreTabs{width:100%;padding:12px 14px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;border:1px solid #becbc4;border-radius:10px;-webkit-appearance:none;appearance:none;cursor:pointer;touch-action:manipulation;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24'%3E%3Cpath fill='%23153c30' d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;padding-right:36px;}
+#scoreTabs:focus{outline:2px solid var(--sc-ink);outline-offset:-2px;}
 .score-tab{border:0;border-radius:999px;padding:12px 15px;min-height:44px;white-space:nowrap;background:#fff;color:#153c30;font-weight:800;cursor:pointer;touch-action:manipulation;}
 .score-tab.active{background:#c8a65e;color:#102a22}
 .course-pane{display:none;padding:22px}
@@ -145,6 +149,10 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .tee-dot{display:inline-block;width:12px;height:12px;border-radius:50%;margin-right:6px;border:1px solid rgba(0,0,0,.15);}
 .tee-selector{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap;}
 .tee-selector label{font-size:.75rem;font-weight:800;color:#153c30;}
+.chc-summary{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px;padding-top:12px;border-top:1px solid #d0dcd4;}
+.chc-pill{display:flex;flex-direction:column;align-items:center;background:#fff;border:1px solid #d0dcd4;border-radius:8px;padding:6px 12px;min-width:60px;}
+.chc-pill-name{font-size:.68rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#153c30;}
+.chc-pill-val{font-size:1.1rem;font-weight:800;color:var(--sc-ink,#0C3B2A);font-family:"IBM Plex Mono",monospace;}
 .tee-selector select{padding:7px 10px;border:1px solid #becbc4;border-radius:8px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;-webkit-appearance:none;touch-action:manipulation;cursor:pointer;}
 .tee-selector select:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e;}
 .tee-active-info{font-size:.78rem;color:#68766f;margin-top:4px;}
@@ -1230,15 +1238,13 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <main>
 <section class="exact-score-section section" id="scores">
 <div class="shell">
-<p class="eyebrow">Exact spreadsheet scoring</p>
-<h2>Enter scores, then download the completed Excel workbook</h2>
-<p class="exact-score-intro">The website now follows the workbook’s scoring formulas: team scramble handicaps and match points, individual Stableford points, High/Low handicap adjustments and cumulative Total points. There are no editable summary fields. The completed workbook download writes every entered hole score into the matching Excel score sheet.</p>
+
 <div class="score-app">
 <div class="hcp-panel">
   <div class="hcp-panel-title">Handicap Index</div>
   <div class="hcp-inputs" id="hcpInputs"></div>
 </div>
-<div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div></div><div class="score-tabs" id="scoreTabs"></div><div id="coursePanes"></div></div>
+<div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div></div><div class="course-select-wrap"><label for="scoreTabs" style="display:block;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#153c30;margin-bottom:8px;">Select Golf Course</label><select id="scoreTabs" onchange="window.showCourseFromSelect(this.value)"></select></div><div id="coursePanes"></div></div>
 <div class="trip-summary">
 <h3>Leaderboard</h3>
 <p>Automatically accumulated round by round in the same order as the Excel summary worksheets.</p>
@@ -1296,28 +1302,22 @@ let playerHI=Object.assign({},defaultHI);
 try{Object.assign(playerHI,JSON.parse(localStorage.getItem(hiStorageKey)||"{}"))}catch(e){}
 
 function calcChc(hi,courseIndex){const c=courses[courseIndex];const tee=c.tees.find(t=>t.n===c.selectedTee)||c.tees[0];const par=c.pars.reduce((a,b)=>a+b,0);return Math.round(hi*tee.slope/113+(tee.cr-par));}
-function changeTee(ci,teeNum){
-  courses[ci].selectedTee=teeNum;
-  // Update active-tee highlight in table
-  const pane=document.querySelectorAll('.course-pane')[ci];
-  if(pane){
-    pane.querySelectorAll('.tee-table tbody tr').forEach((tr,i)=>{
-      tr.classList.toggle('active-tee', courses[ci].tees[i].n===teeNum);
-    });
-  }
-  rebuildChcs();
-  // Refresh label cells for this course
-  courses[ci].blockOrder.forEach(name=>{
-    const p=playerInfo(courses[ci],name);
-    const cell=document.getElementById('lbl-'+ci+'-'+name);
-    if(cell)cell.innerHTML=name+'<br><small>HI '+p.index.toFixed(1)+' \u00b7 CHC '+p.chc+'</small>';
-  });
-  refreshHcpHints();
-  update();
-}
 window.changeTee=function(ci,teeNum){
   courses[ci].selectedTee=teeNum;
-  rebuildChcs();
+  // Recalculate CHCs for ALL courses using each course own selectedTee
+  courses.forEach(function(crs,cIdx){
+    crs.players.forEach(function(p){
+      const hi=playerHI[p.name]!=null?playerHI[p.name]:p.index;
+      const tee=crs.tees.find(function(t){return t.n===crs.selectedTee;})||crs.tees[0];
+      const par=crs.pars.reduce(function(a,b){return a+b;},0);
+      p.chc=Math.round(hi*tee.slope/113+(tee.cr-par));
+    });
+  });
+  // Update CHC pill spans in-place for this course
+  workbookPlayerOrders[ci].forEach(function(n){
+    var el=document.getElementById('chc-'+ci+'-'+n);
+    if(el){var p=playerInfo(courses[ci],n);el.textContent='CHC '+p.chc;}
+  });
   // Rebuild the entire pane for this course so stroke highlights and CHC labels refresh
   const panes=document.getElementById('coursePanes');
   const pane=panes.querySelectorAll('.course-pane')[ci];
@@ -1340,7 +1340,7 @@ window.changeTee=function(ci,teeNum){
   th+='<div class="tee-selector"><label>Tee # for handicap &amp; scorecard:</label>';
   th+='<select id="teesel-'+ci+'" onchange="window.changeTee('+ci+',Number(this.value))">';
   c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' \u2013 '+t.color+' ('+t.yards.toLocaleString()+' yds \u00b7 CR '+t.cr+' \u00b7 Slope '+t.slope+')</option>';});
-  th+='</select></div></div>';
+  th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
   let h='<div class="course-head"><div><h3>'+c.course+'</h3><div class="course-meta">Par '+c.pars.reduce((a,b)=>a+b,0)+' \u00b7 Workbook player order: '+teamText+mirrorNote+'</div></div><button class="excel-link" type="button" onclick="window.downloadWorkbookWithScores()">Download workbook with entered scores</button></div>';
   h+=th;
   h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
@@ -1383,7 +1383,6 @@ window.changeTee=function(ci,teeNum){
     });
     update();
   }));
-  refreshHcpHints();
   update();
 };
 const allPlayers=["Falk","Norbert","Jogi","Stefan"];
@@ -1457,7 +1456,6 @@ function applyOrder(ci){
   // Rebuild both affected panes
   window.changeTee(ci,courses[ci].selectedTee);
   window.changeTee(ci+3,courses[ci+3].selectedTee);
-  refreshHcpHints();
   update();
 }
 function rebuildChcs(){
@@ -1492,6 +1490,8 @@ function buildHcpPanel(){
         playerHI[name]=v;
         localStorage.setItem(hiStorageKey,JSON.stringify(playerHI));if(window._fbSaveHI)window._fbSaveHI(playerHI);
         rebuildChcs();
+        // Update CHC pills
+        courses.forEach(function(c2,ci2){workbookPlayerOrders[ci2].forEach(function(nm){var pill=document.getElementById("chc-pill-"+ci2+"-"+nm);if(pill){var p2=playerInfo(c2,nm);pill.textContent="CHC "+p2.chc;}});});
         // Update label cells in the table
         courses.forEach((c,ci)=>{
           const p=c.players.find(pp=>pp.name===name);
@@ -1502,19 +1502,9 @@ function buildHcpPanel(){
         update();
       }
     });
-    const hint=document.createElement("small");
-    hint.id="hcp-hint-"+name;
-    hint.textContent="CHC: "+courses.map((c,ci)=>calcChc(playerHI[name],ci)).join(" / ");
     field.appendChild(label);
     field.appendChild(input);
-    field.appendChild(hint);
     container.appendChild(field);
-  });
-}
-function refreshHcpHints(){
-  Object.keys(defaultHI).forEach(name=>{
-    const el=document.getElementById("hcp-hint-"+name);
-    if(el)el.textContent="CHC: "+courses.map((c,ci)=>calcChc(playerHI[name],ci)).join(" / ");
   });
 }
 
@@ -1637,15 +1627,17 @@ function activeRoundValues(ci,result,name){
 }
 function save(){localStorage.setItem(storageKey,JSON.stringify(scores));if(window._fbSaveScores)window._fbSaveScores(scores);}
 function showCourse(ci){
-  document.querySelectorAll(".score-tab").forEach((x,i)=>x.classList.toggle("active",i===ci));
   document.querySelectorAll(".course-pane").forEach((x,i)=>x.classList.toggle("active",i===ci));
+  const sel=document.getElementById("scoreTabs");
+  if(sel&&Number(sel.value)!==ci)sel.value=ci;
 }
+window.showCourseFromSelect=function(val){showCourse(Number(val));};
 function build(){
   courses.forEach((c,ci)=>{
-    const tab=document.createElement("button");
-    tab.className="score-tab"+(ci===0?" active":"");
+    const tab=document.createElement("option");
+    tab.value=ci;
     tab.textContent=c.course;
-    tab.onclick=()=>showCourse(ci);
+    if(ci===0)tab.selected=true;
     tabs.appendChild(tab);
 
     const pane=document.createElement("div");
@@ -1665,7 +1657,7 @@ function build(){
     th+='<div class="tee-selector"><label>Tee # for handicap &amp; scorecard:</label>';
     th+='<select id="teesel-'+ci+'" onchange="window.changeTee('+ci+',Number(this.value))">';
     c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' &ndash; '+t.color+' ('+t.yards.toLocaleString()+' yds &middot; CR '+t.cr+' &middot; Slope '+t.slope+')</option>';});
-    th+='</select></div></div>';
+    th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
     h+=th;
     h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
   var tAdjs2={};
@@ -1867,7 +1859,6 @@ window._fbOnHIUpdate = function(data){
       if(cell) cell.innerHTML = name+'<br><small>HI '+p.index.toFixed(1)+' \u00b7 CHC '+p.chc+'</small>';
     });
   });
-  refreshHcpHints();
   update();
 };
 })();
