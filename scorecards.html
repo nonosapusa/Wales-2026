@@ -134,7 +134,13 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .order-panel{background:#f0f5f1;border-bottom:1px solid #d0dcd4;padding:16px 22px;}
 .order-panel-title{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c7a45d;margin-bottom:12px;}
 .order-rows{display:flex;flex-direction:column;gap:10px;}
-.order-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.order-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.order-team{display:flex;align-items:center;gap:8px;}
+.order-vs{font-size:.75rem;color:#68766f;font-weight:600;padding:0 4px;}
+@media(max-width:500px){
+  .order-row{flex-direction:column;align-items:flex-start;gap:6px;}
+  .order-vs{display:none;}
+}
 .order-row-label{font-size:.75rem;font-weight:800;color:#153c30;min-width:90px;}
 .order-sel{padding:6px 8px;border:1px solid #becbc4;border-radius:8px;font:inherit;font-size:16px;font-weight:700;color:#153c30;background:#fff;-webkit-appearance:none;touch-action:manipulation;cursor:pointer;}
 .order-sel:focus{outline:3px solid rgba(200,166,94,.28);border-color:#c8a65e;}
@@ -1424,8 +1430,15 @@ function buildOrderPanel(){
     lbl.className="order-row-label";
     lbl.textContent=name+":";
     row.appendChild(lbl);
+    // Team A (pos 0+1)
+    const teamA=document.createElement("div");
+    teamA.className="order-team";
+    // Team B (pos 2+3)
+    const teamB=document.createElement("div");
+    teamB.className="order-team";
+    const vs=document.createElement("span");
+    vs.className="order-vs";vs.textContent="vs";
     for(let pos=0;pos<4;pos++){
-      if(pos===2){const sep=document.createElement("span");sep.className="order-team-sep";sep.textContent="vs";row.appendChild(sep);}
       const sel=document.createElement("select");
       sel.className="order-sel";
       sel.dataset.ci=ci;
@@ -1437,8 +1450,11 @@ function buildOrderPanel(){
         sel.appendChild(opt);
       });
       sel.addEventListener("change",function(){applyOrder(ci);});
-      row.appendChild(sel);
+      if(pos<2){teamA.appendChild(sel);}else{teamB.appendChild(sel);}
     }
+    row.appendChild(teamA);
+    row.appendChild(vs);
+    row.appendChild(teamB);
     container.appendChild(row);
   });
 }
