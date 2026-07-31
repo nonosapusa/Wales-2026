@@ -2,6 +2,8 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
+  // Update running summary
+  courses.forEach(function(crs2,cIdx2){if(cIdx2>=3)return;var res2=calculateCourse(cIdx2);workbookPlayerOrders[cIdx2].forEach(function(nm2){var scrEl=document.getElementById('+'"run-scr-"+cIdx2+"-"+nm2);var totEl=document.getElementById("run-tot-"+cIdx2+"-"+nm2);if(scrEl)scrEl.textContent=res2[nm2].scramble!=null?res2[nm2].scramble:"-";if(totEl)totEl.textContent=res2[nm2].scramble!=null?res2[nm2].scramble:"-";});});
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wales Golf 2026">
@@ -39,17 +41,19 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .hole-table .hole-si{color:var(--sc-pencil);font-size:12px;width:40px;}
 .hole-table .hole-num{background:var(--sc-ink);color:#F1ECDF;font-weight:600;width:40px;}
 .subtotal-row td,.subtotal-row th{background:var(--sc-ink);color:#F1ECDF;font-weight:600;letter-spacing:.06em;}
+.running-summary td,.running-summary th{background:#f0f7f2;font-size:.75rem;font-weight:700;color:#153c30;border-bottom:2px solid var(--sc-rule);}
+.run-pts{font-family:"IBM Plex Mono",monospace;font-size:.85rem;font-weight:800;color:var(--sc-ink);}.run-total .run-pts,.run-total th.run-pts,.run-total .run-label{font-weight:900;text-decoration:underline;}.run-leader .run-pts,.run-leader th.run-pts{font-weight:900;color:#B3261E;}.run-leader .run-label{font-weight:900;color:#B3261E;}
+.run-label{font-size:.68rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--sc-muted);}
 .gross-row td,.gross-row th{background:var(--sc-ink);font-weight:700;}
-.sc{position:relative;padding:0;min-width:58px;}
-.hole-input{width:100%;height:36px;border:0;background:transparent;text-align:center;text-align-last:center;font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--sc-text);padding:0;border-radius:0;position:relative;z-index:1;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}
+.sc{position:relative;padding:0;min-width:58px;overflow:visible;}
+.hole-input{width:100%;height:36px;border:0;background:transparent;text-align:center;text-align-last:center;font-family:"IBM Plex Mono",monospace;font-size:15px;color:var(--sc-text);padding:0;border-radius:0;position:relative;z-index:3;-webkit-appearance:none;-moz-appearance:textfield;appearance:none;touch-action:manipulation;box-sizing:border-box;display:block;}
 .hole-input::-webkit-inner-spin-button,.hole-input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0;}
 .hole-input:focus{outline:2px solid var(--sc-ink);outline-offset:-2px;background:#FFFCEF;}
 .mirrored-input{background:rgba(0,0,0,.04);color:var(--sc-muted);cursor:not-allowed;}
-.sc::after{content:"";position:absolute;left:50%;top:50%;width:28px;height:28px;transform:translate(-50%,-50%);pointer-events:none;z-index:0;display:none;}
-.score-eagle td.sc::after,.score-birdie td.sc::after{display:block;border:2px solid var(--sc-pencil);border-radius:50%;}
-.score-eagle td.sc::after{box-shadow:0 0 0 3px var(--sc-pencil);}
-.score-bogey td.sc::after{display:block;border:2px solid #000;}
-.score-double td.sc::after{display:block;border:4px double #000;}
+.sc.score-birdie .hole-input{border:2px solid #B3261E;border-radius:50%;width:28px;height:28px;margin:auto;}
+.sc.score-eagle .hole-input{border:2px solid #B3261E;border-radius:50%;box-shadow:0 0 0 2px #B3261E;width:28px;height:28px;margin:auto;}
+.sc.score-bogey .hole-input{border:2px solid #222;border-radius:2px;width:28px;height:28px;margin:auto;}
+.sc.score-double .hole-input{border:3px double #222;border-radius:2px;width:28px;height:28px;margin:auto;}
 .stroke-dots{position:absolute;top:2px;right:4px;color:var(--sc-pencil);font-size:9px;letter-spacing:-.5px;pointer-events:none;line-height:1;font-family:"IBM Plex Mono",monospace;z-index:2;}
 .team-stroke-hole{background:rgba(12,59,42,.07);}
 .team-stroke-hole2{background:rgba(12,59,42,.15);}
@@ -1351,7 +1355,8 @@ window.changeTee=function(ci,teeNum){
   th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
   let h='<div class="course-head"><div><h3>'+c.course+'</h3><div class="course-meta">Par '+c.pars.reduce((a,b)=>a+b,0)+' \u00b7 Workbook player order: '+teamText+mirrorNote+'</div></div><button class="excel-link" type="button" onclick="window.downloadWorkbookWithScores()">Download workbook with entered scores</button></div>';
   h+=th;
-  h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  
   for(let hi=0;hi<18;hi++){
     h+='<tr><td class="label hole-num">'+(hi+1)+'</td><td class="hole-par">'+c.pars[hi]+'</td><td class="hole-si">'+c.sis[hi]+'</td>';
     workbookPlayerOrders[ci].forEach(function(name){
@@ -1677,7 +1682,9 @@ function build(){
     c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' &ndash; '+t.color+' ('+t.yards.toLocaleString()+' yds &middot; CR '+t.cr+' &middot; Slope '+t.slope+')</option>';});
     th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
     h+=th;
-    h+='<div class="score-table-wrap"><table class="hole-table"><thead><tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+    h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  
+  
   var tAdjs2={};
   workbookPlayerOrders[ci].forEach(function(nm){
     if(ci<3){const b=c.blockOrder;const tA=[b[0],b[1]],tB=[b[2],b[3]];const hA=teamHandicap(playerInfo(c,tA[0]).chc,playerInfo(c,tA[1]).chc);const hB=teamHandicap(playerInfo(c,tB[0]).chc,playerInfo(c,tB[1]).chc);tAdjs2[nm]=tA.includes(nm)?(hA-Math.min(hA,hB)):(hB-Math.min(hA,hB));}
@@ -1735,6 +1742,13 @@ function update(){
     document.getElementById("in-"+ci+"-"+name).textContent=count?inside:"—";
     document.getElementById("gross-"+ci+"-"+name).textContent=count?out+inside:"—";
   }));
+  // Running summary for scramble courses
+  courses.forEach(function(crs2,cIdx2){var res2=calculateCourse(cIdx2);workbookPlayerOrders[cIdx2].forEach(function(nm2){var r=res2[nm2]||{};if(cIdx2<3){var s2=document.getElementById('run-scr-'+cIdx2+'-'+nm2);if(s2)s2.textContent=r.scramble!=null?r.scramble:'-';}else{var sf=document.getElementById('run-sfd-'+cIdx2+'-'+nm2);var hl=document.getElementById('run-hlo-'+cIdx2+'-'+nm2);if(sf)sf.textContent=r.sford!=null?r.sford:'-';if(hl)hl.textContent=r.highlow!=null?r.highlow:'-';}var t2=document.getElementById('run-tot-'+cIdx2+'-'+nm2);if(t2){var tot=(r.scramble||0)+(r.sford||0)+(r.highlow||0);t2.textContent=tot>0?tot:'-';}var ldr=document.getElementById('run-ldr-'+cIdx2+'-'+nm2);if(ldr)ldr.textContent='-';});});
+  // Leaderboard totals in Leader row - use cumulative from main loop
+  var allN2=workbookPlayerOrders.flat().filter(function(n,i,a){return a.indexOf(n)===i;});
+  var cum2={};allN2.forEach(function(n){cum2[n]=0;});
+  courses.forEach(function(crs3,ci3){var r3=calculateCourse(ci3);workbookPlayerOrders[ci3].forEach(function(n){cum2[n]+=(r3[n].scramble||0)+(r3[n].sford||0)+(r3[n].highlow||0);});});
+  courses.forEach(function(crs3,ci3){workbookPlayerOrders[ci3].forEach(function(n){var el=document.getElementById('run-ldr-'+ci3+'-'+n);if(el)el.textContent=cum2[n]>0?cum2[n]:'-';});});
 
   const allNames=workbookPlayerOrders.flat().filter((n,i,a)=>a.indexOf(n)===i); const cumulative=Object.fromEntries(allNames.map(n=>[n,{total:0,scramble:0,sford:0,highlow:0}]));
 
