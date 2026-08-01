@@ -2,8 +2,7 @@
 <html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-  // Update running summary
-  courses.forEach(function(crs2,cIdx2){if(cIdx2>=3)return;var res2=calculateCourse(cIdx2);workbookPlayerOrders[cIdx2].forEach(function(nm2){var scrEl=document.getElementById('+'"run-scr-"+cIdx2+"-"+nm2);var totEl=document.getElementById("run-tot-"+cIdx2+"-"+nm2);if(scrEl)scrEl.textContent=res2[nm2].scramble!=null?res2[nm2].scramble:"-";if(totEl)totEl.textContent=res2[nm2].scramble!=null?res2[nm2].scramble:"-";});});
+
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Wales Golf 2026">
@@ -1409,8 +1408,9 @@ window.changeTee=function(ci,teeNum){
 const allPlayers=["Falk","Norbert","Jogi","Stefan"];
 const orderStorageKey="wales2026PlayerOrder";
 function loadSavedOrder(){
-  // Clear corrupted order data (blank player names)
-  try{const s=JSON.parse(localStorage.getItem(orderStorageKey)||"null");if(s&&s.some(o=>o.some(v=>!v))){localStorage.removeItem(orderStorageKey);}}catch(e){}
+  // Always start fresh - clear any saved order so dropdowns begin blank
+  localStorage.removeItem(orderStorageKey);
+  try{const s=null;if(s){};}catch(e){}
   try{
     const saved=JSON.parse(localStorage.getItem(orderStorageKey)||"null");
     if(saved&&saved.length===3&&saved.every(o=>o.length===4&&o.every(v=>v&&v.length>0))){
@@ -1483,7 +1483,7 @@ function buildOrderPanel(activeCi){
       allPlayers.forEach(p=>{
         const opt=document.createElement("option");
         opt.value=p;opt.textContent=p;
-        if(workbookPlayerOrders[ci][pos]===p)opt.selected=true;
+        // no pre-selection
         sel.appendChild(opt);
       });
       sel.addEventListener("change",function(){applyOrder(ci);refreshOrderSelects(ci);});
@@ -1521,9 +1521,11 @@ function applyOrder(ci){
   const saved=[0,1,2].map(i=>workbookPlayerOrders[i]);
   localStorage.setItem(orderStorageKey,JSON.stringify(saved));
   rebuildChcs();
-  // Rebuild both affected panes
+  // Rebuild both affected panes with updated player order
   window.changeTee(ci,courses[ci].selectedTee);
   window.changeTee(ci+3,courses[ci+3].selectedTee);
+  // Switch to the rebuilt course so user sees the updated order
+  showCourse(ci);
   update();
 }
 function rebuildChcs(){
