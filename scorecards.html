@@ -1263,7 +1263,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
   <div class="hcp-panel-title">Handicap Index</div>
   <div class="hcp-inputs" id="hcpInputs"></div>
 </div>
-<div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div></div><div class="course-select-wrap"><label for="scoreTabs" style="display:block;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#153c30;margin-bottom:8px;">Select Golf Course</label><select id="scoreTabs" onchange="window.showCourseFromSelect(this.value)"></select></div><div id="coursePanes"></div></div>
+<div class="order-panel"><div class="order-panel-title">Player order (teams)</div><div class="order-rows" id="orderRows"></div><div class="order-note">Team A = positions 1+2 &nbsp;&middot;&nbsp; Team B = positions 3+4 &nbsp;&middot;&nbsp; Courses 4&ndash;6 mirror courses 1&ndash;3</div><button class="score-btn clear-btn" type="button" id="resetOrderBtn" onclick="window.resetPlayerOrder()" style="margin-top:10px;font-size:.78rem;padding:8px 14px;">Reset player order</button></div><div class="course-select-wrap"><label for="scoreTabs" style="display:block;font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#153c30;margin-bottom:8px;">Select Golf Course</label><select id="scoreTabs" onchange="window.showCourseFromSelect(this.value)"></select></div><div id="coursePanes"></div></div>
 <div class="trip-summary">
 <h3>Leaderboard</h3>
 
@@ -1323,6 +1323,7 @@ try{Object.assign(playerHI,JSON.parse(localStorage.getItem(hiStorageKey)||"{}"))
 function calcChc(hi,courseIndex){const c=courses[courseIndex];const tee=c.tees.find(t=>t.n===c.selectedTee)||c.tees[0];const par=c.pars.reduce((a,b)=>a+b,0);return Math.round(hi*tee.slope/113+(tee.cr-par));}
 window.changeTee=function(ci,teeNum){
   courses[ci].selectedTee=teeNum;
+  if(courses[ci].blockOrder.some(function(v){return !v;}))return;
   // Recalculate CHCs for ALL courses using each course own selectedTee
   courses.forEach(function(crs,cIdx){
     crs.players.forEach(function(p){
@@ -1362,7 +1363,7 @@ window.changeTee=function(ci,teeNum){
   th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
   let h='<div class="course-head"></div>';
   h+=th;
-  h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+  h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+displayOrders[ci].map(n=>'<th>'+(n||'&nbsp;')+'</th>').join('')+'</tr></thead><tbody>';
   
   for(let hi=0;hi<18;hi++){
     h+='<tr><td class="label hole-num">'+(hi+1)+'</td><td class="hole-par">'+c.pars[hi]+'</td><td class="hole-si">'+c.sis[hi]+'</td>';
@@ -1495,15 +1496,34 @@ function buildOrderPanel(activeCi){
     container.appendChild(row);
   });
 }
+window.resetPlayerOrder=function(){
+  _userSetOrders.clear();
+  displayOrders=[["","","",""],["","","",""],["","","",""],["","","",""],["","","",""],["","","",""]];
+  localStorage.removeItem(orderStorageKey);
+  // Reset workbookPlayerOrders to original defaults
+  const defaults=[["Falk","Norbert","Jogi","Stefan"],["Falk","Stefan","Jogi","Norbert"],["Falk","Jogi","Stefan","Norbert"],["Falk","Jogi","Stefan","Norbert"],["Falk","Stefan","Jogi","Norbert"],["Falk","Norbert","Jogi","Stefan"]];
+  defaults.forEach(function(o,i){workbookPlayerOrders[i]=o;courses[i].blockOrder=o;});
+  rebuildChcs();
+  buildOrderPanel(Number(document.getElementById("scoreTabs").value)||0);
+  [0,1,2,3,4,5].forEach(function(i){window.changeTee(i,courses[i].selectedTee);});
+  buildOrderPanel(Number(document.getElementById("scoreTabs").value)||0);
+  update();
+};
+var _applyOrderBusy=false;
+var _userSetOrders=new Set(); // tracks which courses user has explicitly set
 function applyOrder(ci){
+  if(_applyOrderBusy)return;
   const sels=document.querySelectorAll(".order-sel[data-ci='"+ci+"']");
   const newOrder=Array.from(sels).map(s=>s.value);
   if(newOrder.some(v=>!v))return; // ignore if any blank
+  _applyOrderBusy=true;
+  try{
   // Check no team pairing repeats across the 3 scramble courses
   const newTeamA=[newOrder[0],newOrder[1]].sort().join("+");
   const newTeamB=[newOrder[2],newOrder[3]].sort().join("+");
   for(let oci=0;oci<3;oci++){
     if(oci===ci)continue;
+    if(!_userSetOrders.has(oci))continue; // only check user-set courses
     const o=workbookPlayerOrders[oci];
     if(o.some(v=>!v))continue;
     const oTeamA=[o[0],o[1]].sort().join("+");
@@ -1513,25 +1533,32 @@ function applyOrder(ci){
       return;
     }
   }
+  _userSetOrders.add(ci);
   workbookPlayerOrders[ci]=newOrder;
   workbookPlayerOrders[ci+3]=newOrder;
   courses[ci].blockOrder=newOrder;
   courses[ci+3].blockOrder=newOrder;
+  displayOrders[ci]=newOrder;
+  displayOrders[ci+3]=newOrder;
   // Save to localStorage
   const saved=[0,1,2].map(i=>workbookPlayerOrders[i]);
   localStorage.setItem(orderStorageKey,JSON.stringify(saved));
   rebuildChcs();
   // Rebuild both affected panes with updated player order
-  window.changeTee(ci,courses[ci].selectedTee);
-  window.changeTee(ci+3,courses[ci+3].selectedTee);
-  // Switch to the rebuilt course so user sees the updated order
+  // Fully rebuild all panes so player order updates everywhere
+  document.getElementById("scoreTabs").innerHTML="";
+  document.getElementById("coursePanes").innerHTML="";
+  build();
+  buildOrderPanel(ci);
   showCourse(ci);
+  } catch(e){console.error("applyOrder error:",e);}
+  _applyOrderBusy=false;
   update();
 }
 function rebuildChcs(){
   courses.forEach((c,ci)=>{
     c.players.forEach(p=>{
-      if(playerHI[p.name]!=null){
+      if(p.name&&playerHI[p.name]!=null){
         p.index=playerHI[p.name];
         p.chc=calcChc(p.index,ci);
       }
@@ -1730,7 +1757,7 @@ function build(){
     c.tees.forEach(t=>{th+='<option value="'+t.n+'"'+(t.n===c.selectedTee?' selected':'')+'>Tee '+t.n+' &ndash; '+t.color+' ('+t.yards.toLocaleString()+' yds &middot; CR '+t.cr+' &middot; Slope '+t.slope+')</option>';});
     th+='</select></div>';th+='<div class="chc-summary">'+workbookPlayerOrders[ci].map(n=>{const p=playerInfo(c,n);return '<div class="chc-pill"><span class="chc-pill-name">'+n+'</span><span class="chc-pill-val" id="chc-'+ci+'-'+n+'">CHC '+p.chc+'</span></div>';}).join('')+'</div></div>';
     h+=th;
-    h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+workbookPlayerOrders[ci].map(n=>'<th>'+n+'</th>').join('')+'</tr></thead><tbody>';
+    h+='<div class="score-table-wrap"><table class="hole-table"><thead>'+(ci<3?'<tr class="running-summary"><th class="label run-label">Scramble</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-scr-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>':'<tr class="running-summary"><th class="label run-label">S\u2019Ford</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-sfd-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary"><th class="label run-label">High/Low</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-hlo-'+ci+'-'+n+'">-</th>').join('')+'</tr><tr class="running-summary run-total"><th class="label run-label">Course</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-tot-'+ci+'-'+n+'">-</th>').join('')+'</tr>'+'<tr class="running-summary run-leader"><th class="label run-label">Leader</th><th></th><th></th>'+workbookPlayerOrders[ci].map(n=>'<th class="run-pts" id="run-ldr-'+ci+'-'+n+'">-</th>').join('')+'</tr>')+'<tr><th class="label">Hole</th><th>Par</th><th>SI</th>'+displayOrders[ci].map(n=>'<th>'+(n||'&nbsp;')+'</th>').join('')+'</tr></thead><tbody>';
   
   
   var tAdjs2={};
@@ -1902,11 +1929,14 @@ window.downloadWorkbookWithScores=function(){
 };
 
 loadSavedOrder();
+// Store display order separately - blank until user sets it
+var displayOrders=[["","","",""],["","","",""],["","","",""],["","","",""],["","","",""],["","","",""]];
 rebuildChcs();
 build();
 buildHcpPanel();
-buildOrderPanel(0);
 window._scoringReady=true;
+// Build order panel after DOM settles
+buildOrderPanel(0);
 
 // Register Firebase real-time listeners (inside IIFE so all functions are in scope)
 window._fbOnScoresUpdate = function(data){
