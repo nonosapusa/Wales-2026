@@ -1164,6 +1164,12 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 @media(max-width:640px){.pub-grid{grid-template-columns:1fr}}
 .nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:10px;color:#fff;touch-action:manipulation;min-width:44px;min-height:44px;align-items:center;justify-content:center;}
 @media(max-width:900px){.nav-toggle{display:flex;}.navlinks{display:none;position:absolute;top:100%;left:0;right:0;background:#0d2b24;flex-direction:column;padding:8px 0;z-index:100;box-shadow:0 8px 24px rgba(0,0,0,.3);}.navlinks.open{display:flex;}.navlinks a{padding:14px 24px;font-size:1rem;font-weight:600;border-bottom:1px solid rgba(255,255,255,.08);}.navlinks a:last-child{border-bottom:none;}}
+.flights-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:32px;}
+.flight-card{background:#fff;border-radius:18px;padding:28px 32px;box-shadow:0 6px 24px rgba(21,60,48,.08);border:1px solid #dce8df;}
+.flight-direction{font-size:.75rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.flight-number{font-size:.72rem;color:var(--muted);font-weight:500;letter-spacing:.04em;margin-bottom:0;}.flight-number a{color:var(--gold);font-weight:700;text-decoration:underline;text-underline-offset:2px;}
+.flight-players{font-size:1.9rem;font-weight:700;color:var(--forest);font-family:"Playfair Display",serif;margin-bottom:4px;}
+@media(max-width:600px){.flights-grid{grid-template-columns:1fr;}}
 </style>
 <!-- HERO_IMAGE_EMBEDDED_VERIFIED -->
 </head>
@@ -1175,7 +1181,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <h1>Wales Golf<br><em>Trip 2026</em></h1>
 <p class="hero-sub">Six unforgettable rounds, two historic coastal bases, and a spectacular journey through North Wales.</p>
 <div class="hero-meta"><div><span>Dates</span><strong>September 18–27, 2026</strong></div><div><span>Golf</span><strong>6 rounds</strong></div><div><span>Bases</span><strong>Conwy + Harlech</strong></div><div><span>Travel</span><strong>JFK ↔ London</strong></div></div>
-<div class="hero-btns"><a class="btn btn-light" href="#itinerary">Explore the itinerary</a><a class="btn btn-light" href="scorecards.html">Scores &amp; Leaderboard</a></div>
+<div class="hero-btns"><a class="btn btn-light" href="#itinerary">Explore the itinerary</a><a class="btn btn-light" href="scorecards.html">Scores &amp; Leaderboard</a><a class="btn btn-light" href="#flights">Flights &amp; Car</a></div>
 </div>
 </header>
 
@@ -1378,7 +1384,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <p class="eyebrow">Two-base strategy</p><h2>Stay close to the golf</h2>
 <div class="stay-grid">
 <div class="hotel"><div class="num">01</div><h3><a href="https://www.erskinearms.co.uk/" target="_blank" rel="noopener">The Erskine Arms</a></h3><p><b>Conwy base</b> · September 19–22</p><p>A historic coaching inn in central Conwy, positioned for the three northern rounds and access to the town’s restaurants and castle.</p><ul><li>3 nights</li><li>North Wales, Bull Bay and Conwy</li></ul></div>
-<div class="hotel"><div class="num">02</div><h3><a href="https://castlecottageinnharlech.com/" target="_blank" rel="noopener">The Cottage Inn</a></h3><p><b>Harlech base</b> · September 22–26</p><p>A southern base for Porthmadog, Nefyn and Royal St. David’s, with Snowdonia and Cardigan Bay nearby.</p><ul><li>4 nights</li><li>Porthmadog, Nefyn and Royal St. David’s</li></ul></div>
+<div class="hotel"><div class="num">02</div><h3><a href="https://castlecottageinnharlech.com/" target="_blank" rel="noopener">Castle Cottage Inn</a></h3><p><b>Harlech base</b> · September 22–26</p><p>A southern base for Porthmadog, Nefyn and Royal St. David’s, with Snowdonia and Cardigan Bay nearby.</p><ul><li>4 nights</li><li>Porthmadog, Nefyn and Royal St. David’s</li></ul></div>
 </div></div></section>
 
 <section class="section" id="pubs"><div class="shell">
@@ -1397,6 +1403,42 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <div class="tip"><b>Confirm tee times</b><p>Recheck visitor policies, handicaps, green fees and cancellation rules before departure.</p></div>
 <div class="tip"><b>Use live navigation</b><p>Open each journey in Google Maps on the travel day for current traffic and road closures.</p></div>
 </div></div></section>
+
+<section class="section" id="flights"><div class="shell">
+<p class="eyebrow">Travel</p><h2>Arrival &amp; Departure Information</h2>
+<div class="flights-grid">
+  <div class="flight-card">
+    <div class="flight-direction">✈ Arrival &mdash; Saturday, September 19</div>
+    <div class="flight-players"><strong>Stefan</strong></div>
+    <div class="flight-number"><a href="https://www.lufthansa.com/gb/en/timetable-and-flight-status?flightStatus.flightStatusByFlightNumberRequest.date=2026-09-19T00%3A00%3A00&flightStatus.flightStatusByFlightNumberRequest.airline=VL&flightStatus.flightStatusByFlightNumberRequest.flightNumber=924&flightStatus.activeTab=number" target="_blank" rel="noopener">Flight VL924</a> &middot; Frankfurt (FRA) &rarr; London Heathrow (LHR) T2 &middot; 07:00 CEST &ndash; 07:40 BST</div>
+    <div class="flight-players" style="margin-top:12px;"><strong>Jogi</strong></div>
+    <div class="flight-number"><a href="https://www.lufthansa.com/gb/en/timetable-and-flight-status?flightStatus.flightStatusByFlightNumberRequest.date=2026-09-19T00%3A00%3A00&flightStatus.flightStatusByFlightNumberRequest.airline=VL&flightStatus.flightStatusByFlightNumberRequest.flightNumber=924&flightStatus.activeTab=number" target="_blank" rel="noopener">Flight VL924</a> &middot; Frankfurt (FRA) &rarr; London Heathrow (LHR) T2 &middot; 07:00 CEST &ndash; 07:40 BST</div>
+    <div class="flight-players" style="margin-top:12px;"><strong>Norbert</strong></div>
+    <div class="flight-number"><a href="https://www.aa.com/travelInformation/flights/status/detail?search=AA%7C106%7C2026,9,18&ref=search" target="_blank" rel="noopener">Flight AA106</a> &middot; New York (JFK) &rarr; London Heathrow (LHR) T3 &middot; 07:15 EST &ndash; 07:20 BST</div>
+    <div class="flight-players" style="margin-top:12px;"><strong>Falk</strong></div>
+    <div class="flight-number"><a href="https://www.united.com/en/us/flightstatus/details/14/2026-09-19/EWR/LHR/UA" target="_blank" rel="noopener">Flight UA14</a> &middot; Newark (EWR) &rarr; London Heathrow (LHR) T2 &middot; 07:05 EST &ndash; 07:15 BST</div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #dce8df;">
+      <div class="car-label">&#128663; Hertz &mdash; London Heathrow (LHR)</div>
+      <div class="car-detail"><strong>Pick-up:</strong> 08:30 &middot; Booking: <strong>769739905</strong></div>
+    </div>
+  </div>
+  <div class="flight-card">
+    <div class="flight-direction">✈ Departure &mdash; Sunday, September 27</div>
+    <div class="flight-players"><strong>Stefan</strong></div>
+    <div class="flight-number"><a href="https://www.lufthansa.com/gb/en/timetable-and-flight-status?flightStatus.flightStatusByFlightNumberRequest.date=2026-09-27T00%3A00%3A00&flightStatus.flightStatusByFlightNumberRequest.airline=LH&flightStatus.flightStatusByFlightNumberRequest.flightNumber=901&flightStatus.activeTab=number" target="_blank" rel="noopener">Flight LH901</a> &middot; London Heathrow (LHR) &rarr; Frankfurt (FRA) &middot; 09:30 BST &ndash; 12:05 CEST</div>
+    <div class="flight-players" style="margin-top:12px;"><strong>Jogi</strong></div>
+    <div class="flight-number"><a href="https://www.lufthansa.com/gb/en/timetable-and-flight-status?flightStatus.flightStatusByFlightNumberRequest.date=2026-09-27T00%3A00%3A00&flightStatus.flightStatusByFlightNumberRequest.airline=LH&flightStatus.flightStatusByFlightNumberRequest.flightNumber=901&flightStatus.activeTab=number" target="_blank" rel="noopener">Flight LH901</a> &middot; London Heathrow (LHR) &rarr; Frankfurt (FRA) &middot; 09:30 BST &ndash; 12:05 CEST</div>
+    <div class="flight-players" style="margin-top:12px;"><strong>Norbert</strong></div>
+    <div class="flight-number"><a href="https://www.aa.com/travelInformation/flights/status/detail?search=AA%7C106%7C2026,9,27&ref=search" target="_blank" rel="noopener">Flight AA729</a> &middot; London Heathrow (LHR) &rarr; Philadelphia (PHL) &middot; 09:15 BST &ndash; 12:15 EST</div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px solid #dce8df;">
+      <div class="car-label">&#128663; Hertz &mdash; London Heathrow (LHR)</div>
+      <div class="car-detail"><strong>Return:</strong> 10:00 &middot; Booking: <strong>769739905</strong></div>
+    </div>
+  </div>
+</div>
+</div></section>
+
+
 </main>
 
 <footer><div class="shell footer-grid"><div><strong>Wales Golf Trip 2026</strong><p>September 18–27 · Conwy · Anglesey · Harlech · London</p></div><p class="print-note">Planning website · Drive times are approximate.</p></div></footer>
