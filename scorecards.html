@@ -1456,10 +1456,21 @@ function buildOrderPanel(activeCi){
   const container=document.getElementById("orderRows");
   if(!container)return;
   container.innerHTML="";
-  const courseNames=["North Wales","Bull Bay","Conwy"];
-  const ci=activeCi<3?activeCi:activeCi-3;
-  const name=courseNames[ci];
+  const courseNames=["North Wales","Bull Bay","Conwy","Porthmadog","Nefyn","Royal St. David's"];
+  const sourceCi=activeCi<3?activeCi:activeCi-3;
+  const ci=sourceCi;
+  const name=courseNames[activeCi];
   const rows=[{name:name,ci:ci}];
+  // For courses 4-6, show read-only mirrored order
+  if(activeCi>=3){
+    const mirrorName=courseNames[sourceCi];
+    const order=workbookPlayerOrders[sourceCi];
+    const info=document.createElement("div");
+    info.style.cssText="padding:8px 0;font-size:.82rem;color:#153c30;";
+    info.innerHTML='<span style="color:#68766f;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;">Mirrors '+mirrorName+':</span> <strong>'+(order.some(function(v){return !v;})?'(not set yet)':order.join(' &rarr; '))+'</strong>';
+    container.appendChild(info);
+    return;
+  }
   rows.forEach(function(rowData){
     const row=document.createElement("div");
     row.className="order-row";
@@ -1550,6 +1561,11 @@ function applyOrder(ci){
   document.getElementById("coursePanes").innerHTML="";
   build();
   buildOrderPanel(ci);
+  // Re-select the chosen players in the dropdowns
+  document.querySelectorAll(".order-sel[data-ci='"+ci+"']").forEach(function(sel,i){
+    sel.value=newOrder[i];
+  });
+  refreshOrderSelects(ci);
   showCourse(ci);
   } catch(e){console.error("applyOrder error:",e);}
   _applyOrderBusy=false;
@@ -1587,8 +1603,8 @@ function buildHcpPanel(){
         playerHI[name]=v;
         localStorage.setItem(hiStorageKey,JSON.stringify(playerHI));if(window._fbSaveHI)window._fbSaveHI(playerHI);
         rebuildChcs();
-        // Update CHC pills
-        courses.forEach(function(c2,ci2){workbookPlayerOrders[ci2].forEach(function(nm){var pill=document.getElementById("chc-pill-"+ci2+"-"+nm);if(pill){var p2=playerInfo(c2,nm);pill.textContent="CHC "+p2.chc;}});});
+        // Update CHC pills - id is "chc-ci-name"
+        courses.forEach(function(c2,ci2){c2.players.forEach(function(p2){var pill=document.getElementById("chc-"+ci2+"-"+p2.name);if(pill)pill.textContent="CHC "+p2.chc;});});
         // Update label cells in the table
         courses.forEach((c,ci)=>{
           const p=c.players.find(pp=>pp.name===name);
