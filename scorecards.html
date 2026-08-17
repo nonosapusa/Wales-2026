@@ -135,6 +135,18 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .formula-note{margin-top:12px;padding:11px 13px;background:#edf3ef;border-left:4px solid #c8a65e;border-radius:8px;color:#4f5d57;font-size:.88rem}
 @media(max-width:850px){.course-head{display:block}.excel-link{margin-top:12px}}
 .hcp-panel{background:#eaf0ec;border-bottom:1px solid #d0dcd4;padding:18px 22px;}
+.readonly-bar{display:flex;align-items:center;justify-content:space-between;background:#fff8e7;border-bottom:2px solid #c7a45d;padding:12px 22px;gap:12px;}
+.readonly-bar span{font-size:.82rem;font-weight:700;color:#153c30;}
+.toggle-wrap{display:flex;align-items:center;gap:8px;cursor:pointer;}
+.toggle-wrap input[type=checkbox]{width:0;height:0;opacity:0;position:absolute;}
+.toggle-slider{width:44px;height:24px;background:#ccc;border-radius:999px;position:relative;transition:.2s;flex-shrink:0;}
+.toggle-slider::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;background:#fff;border-radius:50%;transition:.2s;}
+.toggle-wrap input:checked+.toggle-slider{background:#c7a45d;}
+.toggle-wrap input:checked+.toggle-slider::after{left:23px;}
+.toggle-label{font-size:.82rem;font-weight:700;color:#153c30;}
+body.readonly-mode .hole-input,.readonly-mode .hcp-field input,.readonly-mode .order-sel,.readonly-mode .tee-selector select{pointer-events:none;opacity:.6;background:#f0f0f0;}
+body.readonly-mode .score-btn,.readonly-mode .order-sel,.readonly-mode #resetOrderBtn{pointer-events:none;opacity:.5;}
+body.readonly-mode .score-app::after{content:"Read Only";position:fixed;top:60px;right:16px;background:#c7a45d;color:#fff;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px;z-index:999;}
 .hcp-panel-title{font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#c7a45d;margin-bottom:12px;}
 .hcp-inputs{display:flex;gap:20px;flex-wrap:wrap;}
 .hcp-field{display:flex;flex-direction:column;gap:4px;}
@@ -1259,6 +1271,14 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 <div class="shell">
 
 <div class="score-app">
+<div class="readonly-bar">
+  <span>View mode</span>
+  <label class="toggle-wrap" title="Toggle read-only mode">
+    <input type="checkbox" id="readonlyToggle" onchange="window.toggleReadOnly(this.checked)">
+    <span class="toggle-slider"></span>
+    <span class="toggle-label">Read only</span>
+  </label>
+</div>
 <div class="hcp-panel">
   <div class="hcp-panel-title">Handicap Index</div>
   <div class="hcp-inputs" id="hcpInputs"></div>
@@ -1321,6 +1341,14 @@ let playerHI=Object.assign({},defaultHI);
 try{Object.assign(playerHI,JSON.parse(localStorage.getItem(hiStorageKey)||"{}"))}catch(e){}
 
 function calcChc(hi,courseIndex){const c=courses[courseIndex];const tee=c.tees.find(t=>t.n===c.selectedTee)||c.tees[0];const par=c.pars.reduce((a,b)=>a+b,0);return Math.round(hi*tee.slope/113+(tee.cr-par));}
+window.toggleReadOnly=function(on){
+  document.body.classList.toggle("readonly-mode",on);
+  localStorage.setItem("wales2026ReadOnly",on?"1":"0");
+  // disable/enable all hole inputs
+  document.querySelectorAll(".hole-input:not(.mirrored-input)").forEach(function(el){
+    el.readOnly=on;
+  });
+};
 window.changeTee=function(ci,teeNum){
   courses[ci].selectedTee=teeNum;
   if(courses[ci].blockOrder.some(function(v){return !v;}))return;
@@ -1951,6 +1979,11 @@ rebuildChcs();
 build();
 buildHcpPanel();
 window._scoringReady=true;
+// Restore read-only state
+if(localStorage.getItem("wales2026ReadOnly")==="1"){
+  document.getElementById("readonlyToggle").checked=true;
+  window.toggleReadOnly(true);
+}
 // Build order panel after DOM settles
 buildOrderPanel(0);
 
