@@ -1341,13 +1341,18 @@ let playerHI=Object.assign({},defaultHI);
 try{Object.assign(playerHI,JSON.parse(localStorage.getItem(hiStorageKey)||"{}"))}catch(e){}
 
 function calcChc(hi,courseIndex){const c=courses[courseIndex];const tee=c.tees.find(t=>t.n===c.selectedTee)||c.tees[0];const par=c.pars.reduce((a,b)=>a+b,0);return Math.round(hi*tee.slope/113+(tee.cr-par));}
-window.toggleReadOnly=function(on){
+function applyReadOnly(on){
   document.body.classList.toggle("readonly-mode",on);
-  localStorage.setItem("wales2026ReadOnly",on?"1":"0");
-  // disable/enable all hole inputs
-  document.querySelectorAll(".hole-input:not(.mirrored-input)").forEach(function(el){
-    el.readOnly=on;
-  });
+  var toggle=document.getElementById("readonlyToggle");
+  if(toggle)toggle.checked=on;
+  document.querySelectorAll(".hole-input:not(.mirrored-input)").forEach(function(el){el.readOnly=on;});
+}
+window.toggleReadOnly=function(on){
+  // Save to Firebase so ALL devices get the lock
+  if(window._fbDb){
+    window._fbDb.ref("readOnly").set(on?1:0);
+  }
+  applyReadOnly(on);
 };
 window.changeTee=function(ci,teeNum){
   courses[ci].selectedTee=teeNum;
@@ -1979,10 +1984,11 @@ rebuildChcs();
 build();
 buildHcpPanel();
 window._scoringReady=true;
-// Restore read-only state
-if(localStorage.getItem("wales2026ReadOnly")==="1"){
-  document.getElementById("readonlyToggle").checked=true;
-  window.toggleReadOnly(true);
+// Listen to Firebase readOnly state - applies to ALL devices
+if(window._fbDb){
+  window._fbDb.ref("readOnly").on("value",function(snap){
+    applyReadOnly(snap.val()===1);
+  });
 }
 // Build order panel after DOM settles
 buildOrderPanel(0);
