@@ -60,6 +60,9 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .stroke-dots{position:absolute;top:2px;right:4px;color:var(--sc-pencil);font-size:9px;letter-spacing:-.5px;pointer-events:none;line-height:1;font-family:"IBM Plex Mono",monospace;z-index:2;}
 .team-stroke-hole{background:rgba(12,59,42,.07);}
 .team-stroke-hole2{background:rgba(12,59,42,.15);}
+.hole-won .hole-input{font-weight:900;color:#0d2b24;}
+.hole-won::before{content:'';position:absolute;inset:0;border:2px solid #c7a45d;pointer-events:none;z-index:1;}
+.hole-tied .hole-input{color:#888;}
 .round-total{font-weight:600;color:#F1ECDF;background:var(--sc-ink);}
 .score-app .score-table-wrap{border:1px solid var(--sc-rule);border-radius:10px;overflow:hidden;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}.summary-block h3{margin:0 0 5px;color:#153c30}.summary-help{margin:0 0 14px;color:#69736f;font-size:.9rem}.summary-table{width:100%;border-collapse:collapse}.summary-table th,.summary-table td{padding:8px 6px;border-bottom:1px solid #ded6c5;text-align:center;font-size:.85rem;}@media(max-width:500px){.summary-table th,.summary-table td{padding:6px 4px;font-size:.78rem;}}.summary-table th{background:#153c30;color:#fff}.summary-table td:first-child,.summary-table th:first-child{text-align:left}.summary-value{font-weight:900;color:#153c30}.zero-value{color:#9aa39f}
@@ -1445,6 +1448,7 @@ window.changeTee=function(ci,teeNum){
       m.value=scores[key(mci,mirroredSourceName(mci,mname),mhi)]??"";
     });
     update();
+    if(el.value.length===1&&el.value>="1"&&el.value<="9") advanceFromInput(el);
   }));
   update();
 };
@@ -1889,10 +1893,28 @@ h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-ta
       m.value=scores[key(ci,source,hi)]??"";
     });
     update();
+    if(el.value.length===1&&el.value>="1"&&el.value<="9") advanceFromInput(el);
   }));
   update();
 }
 
+function advanceFromInput(el){
+  const ci=Number(el.dataset.ci), hi=Number(el.dataset.hi);
+  const order=workbookPlayerOrders[ci];
+  const pos=order.indexOf(el.dataset.name);
+  // Next player on the same hole (skip mirrored/readonly inputs)
+  for(let p=pos+1;p<order.length;p++){
+    const next=document.querySelector('.hole-input:not([readonly])[data-ci="'+ci+'"][data-name="'+order[p]+'"][data-hi="'+hi+'"]');
+    if(next){next.focus();next.select();return;}
+  }
+  // No more players on this hole — move to first player on next hole
+  for(let h=hi+1;h<18;h++){
+    for(let p=0;p<order.length;p++){
+      const next=document.querySelector('.hole-input:not([readonly])[data-ci="'+ci+'"][data-name="'+order[p]+'"][data-hi="'+h+'"]');
+      if(next){next.focus();next.select();return;}
+    }
+  }
+}
 function update(){
   courses.forEach((c,ci)=>workbookPlayerOrders[ci].forEach(name=>{
     let out=0,inside=0,count=0;
@@ -1900,11 +1922,59 @@ function update(){
       const x=effectiveScore(ci,name,h);
       if(x!==null){count++;if(h<9)out+=x;else inside+=x}
       const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+name+'"][data-hi="'+h+'"]');
-      if(inp){const td=inp.closest("td");td.classList.remove("score-eagle","score-birdie","score-bogey","score-double");if(x!==null){const diff=x-c.pars[h];if(diff<=-2)td.classList.add("score-eagle");else if(diff===-1)td.classList.add("score-birdie");else if(diff===1)td.classList.add("score-bogey");else if(diff>=2)td.classList.add("score-double");}}}
+      if(inp){const td=inp.closest("td");td.classList.remove("score-eagle","score-birdie","score-bogey","score-double","hole-won","hole-tied");if(x!==null){const diff=x-c.pars[h];if(diff<=-2)td.classList.add("score-eagle");else if(diff===-1)td.classList.add("score-birdie");else if(diff===1)td.classList.add("score-bogey");else if(diff>=2)td.classList.add("score-double");}}}
     document.getElementById("out-"+ci+"-"+name).textContent=count?out:"—";
     document.getElementById("in-"+ci+"-"+name).textContent=count?inside:"—";
     document.getElementById("gross-"+ci+"-"+name).textContent=count?out+inside:"—";
   }));
+  // Hole-winner marking
+  courses.forEach(function(c,ci){
+    const b=c.blockOrder;
+    const teamA=[b[0],b[1]], teamB=[b[2],b[3]];
+    if(ci<3){
+      // Scramble: compare team net scores per hole
+      const hcpA=teamHandicap(playerInfo(c,teamA[0]).chc,playerInfo(c,teamA[1]).chc);
+      const hcpB=teamHandicap(playerInfo(c,teamB[0]).chc,playerInfo(c,teamB[1]).chc);
+      const adjA=hcpA-Math.min(hcpA,hcpB), adjB=hcpB-Math.min(hcpA,hcpB);
+      for(let h=0;h<18;h++){
+        const sA=effectiveScore(ci,teamA[0],h), sB=effectiveScore(ci,teamB[0],h);
+        if(sA===null||sB===null)continue;
+        const netA=sA-allocatedStrokes(adjA,c.sis[h]);
+        const netB=sB-allocatedStrokes(adjB,c.sis[h]);
+        const winA=netA<netB, winB=netB<netA, tied=netA===netB;
+        workbookPlayerOrders[ci].forEach(function(nm){
+          const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+nm+'"][data-hi="'+h+'"]');
+          if(!inp)return;
+          const td=inp.closest("td");
+          td.classList.remove("hole-won","hole-tied");
+          const inTeamA=teamA.includes(nm);
+          if(tied)td.classList.add("hole-tied");
+          else if(inTeamA&&winA)td.classList.add("hole-won");
+          else if(!inTeamA&&winB)td.classList.add("hole-won");
+        });
+      }
+    } else {
+      // Stableford/High-Low: individual — lowest net score wins the hole
+      const minimumHcp=Math.min(...b.map(n=>playerInfo(c,n).chc));
+      const adjusted={};
+      b.forEach(n=>adjusted[n]=playerInfo(c,n).chc-minimumHcp);
+      for(let h=0;h<18;h++){
+        const nets=b.map(n=>{const s=effectiveScore(ci,n,h);return s===null?null:s-allocatedStrokes(adjusted[n],c.sis[h]);});
+        if(nets.some(x=>x===null))continue;
+        const minNet=Math.min(...nets);
+        const winners=nets.filter(x=>x===minNet).length;
+        workbookPlayerOrders[ci].forEach(function(nm,pi){
+          const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+nm+'"][data-hi="'+h+'"]');
+          if(!inp)return;
+          const td=inp.closest("td");
+          td.classList.remove("hole-won","hole-tied");
+          const net=nets[b.indexOf(nm)];
+          if(winners>1&&net===minNet)td.classList.add("hole-tied");
+          else if(winners===1&&net===minNet)td.classList.add("hole-won");
+        });
+      }
+    }
+  });
   // Running summary for scramble courses
   courses.forEach(function(crs2,cIdx2){var res2=calculateCourse(cIdx2);workbookPlayerOrders[cIdx2].forEach(function(nm2){var r=res2[nm2]||{};if(cIdx2<3){var s2=document.getElementById('run-scr-'+cIdx2+'-'+nm2);if(s2)s2.textContent=r.scramble!=null?r.scramble:'-';}else{var sf=document.getElementById('run-sfd-'+cIdx2+'-'+nm2);var hl=document.getElementById('run-hlo-'+cIdx2+'-'+nm2);if(sf)sf.textContent=r.sford!=null?r.sford:'-';if(hl)hl.textContent=r.highlow!=null?r.highlow:'-';}var t2=document.getElementById('run-tot-'+cIdx2+'-'+nm2);if(t2){var tot=(r.scramble||0)+(r.sford||0)+(r.highlow||0);t2.textContent=tot>0?tot:'-';}var ldr=document.getElementById('run-ldr-'+cIdx2+'-'+nm2);if(ldr)ldr.textContent='-';});});
   // Leaderboard totals in Leader row - use cumulative from main loop
