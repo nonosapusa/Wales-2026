@@ -1309,6 +1309,7 @@ body.readonly-mode .score-app::after{content:"Read Only";position:fixed;top:60px
   var _fbDb = firebase.database();
   window._fbSaveScores = function(scores){ _fbDb.ref('scores').set(scores); };
   window._fbSaveHI = function(hi){ _fbDb.ref('handicapIndexes').set(hi); };
+  window._fbSaveOrders = function(orders){ _fbDb.ref('playerOrders').set(orders); };
 
   // Attach listeners directly - callbacks are registered synchronously by the scoring script
   _fbDb.ref('scores').on('value', function(snap){
@@ -1318,6 +1319,10 @@ body.readonly-mode .score-app::after{content:"Read Only";position:fixed;top:60px
   _fbDb.ref('handicapIndexes').on('value', function(snap){
     var data = snap.val();
     if(data && window._fbOnHIUpdate) window._fbOnHIUpdate(data);
+  });
+  _fbDb.ref('playerOrders').on('value', function(snap){
+    var data = snap.val();
+    if(data && window._fbOnOrdersUpdate) window._fbOnOrdersUpdate(data);
   });
 </script>
 <script>
@@ -1612,9 +1617,10 @@ function applyOrder(ci){
   courses[ci+3].blockOrder=newOrder;
   displayOrders[ci]=newOrder;
   displayOrders[ci+3]=newOrder;
-  // Save to localStorage
+  // Save to localStorage and Firebase
   const saved=[0,1,2].map(i=>workbookPlayerOrders[i]);
   localStorage.setItem(orderStorageKey,JSON.stringify(saved));
+  if(window._fbSaveOrders) window._fbSaveOrders(saved);
   rebuildChcs();
   // Rebuild both affected panes with updated player order
   // Fully rebuild all panes so player order updates everywhere
@@ -2053,6 +2059,36 @@ window._fbOnHIUpdate = function(data){
       if(cell) cell.innerHTML = name+'<br><small>HI '+p.index.toFixed(1)+' \u00b7 CHC '+p.chc+'</small>';
     });
   });
+  update();
+};
+window._fbOnOrdersUpdate = function(data){
+  if(!Array.isArray(data)||data.length!==3)return;
+  if(!data.every(function(o){return Array.isArray(o)&&o.length===4&&o.every(function(v){return v&&v.length>0;});}))return;
+  // Apply only courses where the incoming order differs from current (avoids overwriting mid-selection)
+  var changed=false;
+  data.forEach(function(o,ci){
+    var cur=workbookPlayerOrders[ci];
+    if(o.join()!==cur.join()){
+      workbookPlayerOrders[ci]=o;
+      workbookPlayerOrders[ci+3]=o;
+      courses[ci].blockOrder=o;
+      courses[ci+3].blockOrder=o;
+      displayOrders[ci]=o;
+      displayOrders[ci+3]=o;
+      _userSetOrders.add(ci);
+      changed=true;
+    }
+  });
+  if(!changed)return;
+  localStorage.setItem(orderStorageKey,JSON.stringify(data));
+  rebuildChcs();
+  document.getElementById("scoreTabs").innerHTML="";
+  document.getElementById("coursePanes").innerHTML="";
+  build();
+  var activeCi=Number(document.getElementById("scoreTabs").value)||0;
+  buildOrderPanel(activeCi);
+  refreshOrderSelects(activeCi<3?activeCi:activeCi-3);
+  showCourse(activeCi);
   update();
 };
 })();
