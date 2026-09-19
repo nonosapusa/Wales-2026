@@ -1528,9 +1528,11 @@ function buildOrderPanel(activeCi){
       allPlayers.forEach(p=>{
         const opt=document.createElement("option");
         opt.value=p;opt.textContent=p;
-        // no pre-selection
         sel.appendChild(opt);
       });
+      // Restore saved selection if available
+      const saved=displayOrders[ci]&&displayOrders[ci][pos];
+      if(saved)sel.value=saved;
       sel.addEventListener("change",function(){applyOrder(ci);refreshOrderSelects(ci);});
       if(pos<2){teamA.appendChild(sel);}else{teamB.appendChild(sel);}
     }
