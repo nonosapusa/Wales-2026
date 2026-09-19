@@ -129,6 +129,7 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .score-btn{border:0;border-radius:999px;padding:12px 18px;font-weight:800;cursor:pointer;touch-action:manipulation;}
 .save-btn{background:#153c30;color:#fff}
 .clear-btn{background:#e9ece9;color:#26342f}
+.print-btn{background:#c7a45d;color:#0d2b24}
 .score-note{font-size:.88rem;color:#64716b;margin-top:12px}
 .pending{color:#aaa;}
 .partial{color:#b88a22;font-weight:700;}
@@ -1255,6 +1256,8 @@ body.readonly-mode .score-app::after{content:"Read Only";position:fixed;top:60px
 .exact-score-section{padding-top:64px}
 </style>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 <header class="page-head">
@@ -1382,6 +1385,7 @@ window.changeTee=function(ci,teeNum){
   const wasActive=pane.classList.contains('active');
   const newPane=document.createElement('div');
   newPane.className=pane.className;
+  newPane.id="pane-"+ci;
   // rebuild HTML for this pane
   const c=courses[ci];
   const teamText=c.blockOrder.join(' \u2192 ');
@@ -1823,6 +1827,7 @@ function build(){
 
     const pane=document.createElement("div");
     pane.className="course-pane"+(ci===0?" active":"");
+    pane.id="pane-"+ci;
     const teamText=c.blockOrder.join(" → "); const mirrorNote=ci<3?" · Player 2 copies Player 1; Player 4 copies Player 3":"";
 
     let h='<div class="course-head"></div>';
@@ -1870,7 +1875,7 @@ function build(){
   h+='<tr class="subtotal-row"><td class="label">In</td><td class="hole-par">'+c.pars.slice(9).reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="in-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='<tr class="subtotal-row gross-row"><td class="label">Gross</td><td class="hole-par">'+c.pars.reduce((a,b)=>a+b,0)+'</td><td class="hole-si">&mdash;</td>'+workbookPlayerOrders[ci].map(n=>'<td class="round-total" id="gross-'+ci+'-'+n+'">-</td>').join('')+'</tr>';
   h+='</tbody></table></div>';
-h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn save-btn" type="button" onclick="window.downloadWorkbookWithScores()">Download Excel</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div></div>';
+h+='<div class="summary-block"><h3>'+c.course+' summary</h3><div class="score-table-wrap"><table class="summary-table"><thead><tr><th>Golfer</th><th>Total</th><th>Scramble</th><th>S&#39;Ford</th><th>High/Low</th></tr></thead><tbody id="summary-'+ci+'"></tbody></table></div><div class="score-actions"><button class="score-btn save-btn" type="button" onclick="window.saveWalesScores()">Save scores</button><button class="score-btn save-btn" type="button" onclick="window.downloadWorkbookWithScores()">Download Excel</button><button class="score-btn print-btn" type="button" onclick="window.printScorecard('+ci+')">Print Scorecard</button><button class="score-btn clear-btn" type="button" onclick="window.clearWalesCourse('+ci+')">Clear this course</button></div></div>';
     pane.innerHTML=h;
     panes.appendChild(pane);
   });
@@ -1945,6 +1950,79 @@ function update(){
 }
 
 window.saveWalesScores=()=>{save();alert("Scores saved on this device.")};
+window.printScorecard=function(ci){
+  var pane=document.getElementById("pane-"+ci);
+  if(!pane){alert("No scorecard found for this course.");return;}
+  var btn=pane.querySelector(".print-btn");
+  if(btn){btn.textContent="Generating PDF…";btn.disabled=true;}
+  // Build a clean off-screen render target
+  var wrap=document.createElement("div");
+  wrap.style.cssText="position:fixed;left:-9999px;top:0;width:900px;background:#fff;padding:20px;font-family:DM Sans,sans-serif;font-size:12px;color:#000;";
+  // Heading
+  var h2=document.createElement("div");
+  h2.style.cssText="font-size:16px;font-weight:800;margin-bottom:12px;color:#0d2b24;";
+  var tee=courses[ci].tees.find(function(t){return t.n===courses[ci].selectedTee;})||courses[ci].tees[0];
+  h2.textContent=courses[ci].course+" · "+tee.n+" tee · Wales Golf Trip 2026";
+  wrap.appendChild(h2);
+  // Player CHC line
+  var chcLine=document.createElement("div");
+  chcLine.style.cssText="font-size:11px;color:#555;margin-bottom:10px;";
+  chcLine.textContent=workbookPlayerOrders[ci].map(function(n){var p=playerInfo(courses[ci],n);return n+": CHC "+p.chc;}).join("  ·  ");
+  wrap.appendChild(chcLine);
+  // Clone the scorecard table
+  var tableWrap=pane.querySelector(".score-table-wrap");
+  if(!tableWrap){if(btn){btn.textContent="Print Scorecard";btn.disabled=false;}return;}
+  var tblClone=tableWrap.cloneNode(true);
+  tblClone.style.cssText="overflow:visible;border:1px solid #ccc;border-radius:6px;";
+  // Replace inputs with plain text spans
+  tblClone.querySelectorAll("input.hole-input").forEach(function(inp){
+    var span=document.createElement("span");
+    span.textContent=inp.value||"";
+    span.style.cssText="display:block;text-align:center;font-size:11px;";
+    // Preserve score indicator classes
+    span.className=inp.className.replace("hole-input","").trim();
+    inp.parentNode.replaceChild(span,inp);
+  });
+  // Style the table for print
+  var tbl=tblClone.querySelector("table");
+  if(tbl){
+    tbl.style.cssText="width:100%;border-collapse:collapse;font-size:11px;";
+    tbl.querySelectorAll("th,td").forEach(function(cell){
+      cell.style.border="1px solid #bbb";
+      cell.style.padding="3px 4px";
+      cell.style.textAlign="center";
+    });
+    tbl.querySelectorAll(".label").forEach(function(cell){cell.style.textAlign="left";cell.style.fontWeight="700";});
+    tbl.querySelectorAll(".round-total").forEach(function(cell){cell.style.background="#153c30";cell.style.color="#fff";});
+    tbl.querySelectorAll("th").forEach(function(cell){cell.style.background="#153c30";cell.style.color="#fff";});
+    tbl.querySelectorAll(".team-stroke-hole").forEach(function(cell){cell.style.background="rgba(12,80,55,.18)";});
+    tbl.querySelectorAll(".team-stroke-hole2").forEach(function(cell){cell.style.background="rgba(12,59,42,.28)";});
+  }
+  wrap.appendChild(tblClone);
+  document.body.appendChild(wrap);
+  html2canvas(wrap,{scale:2,useCORS:true,backgroundColor:"#ffffff"}).then(function(canvas){
+    document.body.removeChild(wrap);
+    var imgData=canvas.toDataURL("image/png");
+    var pdf=new window.jspdf.jsPDF({orientation:"landscape",unit:"mm",format:"a4"});
+    var pageW=pdf.internal.pageSize.getWidth();
+    var pageH=pdf.internal.pageSize.getHeight();
+    var margin=10;
+    var imgW=pageW-margin*2;
+    var imgH=canvas.height*(imgW/canvas.width);
+    if(imgH>pageH-margin*2){
+      imgH=pageH-margin*2;
+      imgW=canvas.width*(imgH/canvas.height);
+    }
+    pdf.addImage(imgData,"PNG",margin,margin,imgW,imgH);
+    var fileName=courses[ci].course.replace(/[^a-zA-Z0-9]/g,"_")+"_Scorecard.pdf";
+    pdf.save(fileName);
+    if(btn){btn.textContent="Print Scorecard";btn.disabled=false;}
+  }).catch(function(e){
+    document.body.removeChild(wrap);
+    if(btn){btn.textContent="Print Scorecard";btn.disabled=false;}
+    alert("PDF generation failed: "+e.message);
+  });
+};
 window.clearWalesCourse=(ci)=>{
   if(!confirm("Clear all entered hole scores for this course?"))return;
   Object.keys(scores).filter(k=>k.startsWith(ci+"|")).forEach(k=>delete scores[k]);
