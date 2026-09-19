@@ -1484,6 +1484,26 @@ function refreshOrderSelects(ci){
     });
   });
 }
+function updateStrokeAdvantage(ci){
+  const div=document.getElementById("stroke-adv-"+ci);
+  if(!div)return;
+  const order=displayOrders[ci];
+  if(!order||order.some(function(v){return !v;})){div.innerHTML="";return;}
+  const c=courses[ci];
+  const tA=[order[0],order[1]], tB=[order[2],order[3]];
+  const pA0=playerInfo(c,tA[0]),pA1=playerInfo(c,tA[1]),pB0=playerInfo(c,tB[0]),pB1=playerInfo(c,tB[1]);
+  if(!pA0||!pA1||!pB0||!pB1){div.innerHTML="";return;}
+  const hA=teamHandicap(pA0.chc,pA1.chc);
+  const hB=teamHandicap(pB0.chc,pB1.chc);
+  function teamMath(p0,p1,h){
+    const hi=Math.max(p0.chc,p1.chc), lo=Math.min(p0.chc,p1.chc);
+    return '(0.15&times;'+hi+' + 0.35&times;'+lo+') = <strong>'+h+'</strong>';
+  }
+  div.innerHTML=
+    '<span style="color:#68766f;font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;">Team Handicap</span><br>'+
+    '<strong>'+tA[0]+'</strong> &amp; <strong>'+tA[1]+'</strong>: '+teamMath(pA0,pA1,hA)+
+    '<br><strong>'+tB[0]+'</strong> &amp; <strong>'+tB[1]+'</strong>: '+teamMath(pB0,pB1,hB);
+}
 function buildOrderPanel(activeCi){
   if(activeCi===undefined)activeCi=0;
   const container=document.getElementById("orderRows");
@@ -1540,6 +1560,12 @@ function buildOrderPanel(activeCi){
     row.appendChild(vs);
     row.appendChild(teamB);
     container.appendChild(row);
+    // Stroke advantage info (shown once all 4 players are selected)
+    const advDiv=document.createElement("div");
+    advDiv.id="stroke-adv-"+ci;
+    advDiv.style.cssText="margin-top:8px;font-size:.82rem;color:#153c30;";
+    container.appendChild(advDiv);
+    updateStrokeAdvantage(ci);
   });
 }
 window.resetPlayerOrder=function(){
