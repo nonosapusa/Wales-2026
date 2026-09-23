@@ -58,11 +58,17 @@ footer{background:#081e18;color:#fff;padding:52px 0}.footer-grid{display:flex;ju
 .sc.score-bogey .hole-input{border:2px solid #222;border-radius:2px;width:28px;height:28px;margin:auto;}
 .sc.score-double .hole-input{border:3px double #222;border-radius:2px;width:28px;height:28px;margin:auto;}
 .stroke-dots{position:absolute;top:2px;right:4px;color:var(--sc-pencil);font-size:9px;letter-spacing:-.5px;pointer-events:none;line-height:1;font-family:"IBM Plex Mono",monospace;z-index:2;}
+.pts-badge{position:absolute;bottom:2px;left:4px;font-size:9px;font-weight:700;color:#153c30;pointer-events:none;line-height:1;font-family:"IBM Plex Mono",monospace;z-index:2;opacity:.75;}
+.hl-badge{position:absolute;bottom:2px;right:4px;font-size:9px;font-weight:700;pointer-events:none;line-height:1;font-family:"IBM Plex Mono",monospace;z-index:2;opacity:.8;}
 .team-stroke-hole{background:rgba(12,59,42,.07);}
 .team-stroke-hole2{background:rgba(12,59,42,.15);}
 .hole-won .hole-input{font-weight:900;color:#0d2b24;}
 .hole-won::before{content:'';position:absolute;inset:0;border:2px solid #c7a45d;pointer-events:none;z-index:1;}
 .hole-tied .hole-input{color:#888;}
+.hole-low::before{content:'';position:absolute;inset:0;border:2px solid #2e7d32;pointer-events:none;z-index:1;}
+.hole-low .hole-input{font-weight:900;color:#2e7d32;}
+.hole-high::before{content:'';position:absolute;inset:0;border:2px solid #b71c1c;pointer-events:none;z-index:1;}
+.hole-high .hole-input{font-weight:900;color:#b71c1c;}
 .round-total{font-weight:600;color:#F1ECDF;background:var(--sc-ink);}
 .score-app .score-table-wrap{border:1px solid var(--sc-rule);border-radius:10px;overflow:hidden;}
 .summary-block{margin-top:24px;background:#f6f0e2;border-radius:18px;padding:20px}.summary-block h3{margin:0 0 5px;color:#153c30}.summary-help{margin:0 0 14px;color:#69736f;font-size:.9rem}.summary-table{width:100%;border-collapse:collapse}.summary-table th,.summary-table td{padding:8px 6px;border-bottom:1px solid #ded6c5;text-align:center;font-size:.85rem;}@media(max-width:500px){.summary-table th,.summary-table td{padding:6px 4px;font-size:.78rem;}}.summary-table th{background:#153c30;color:#fff}.summary-table td:first-child,.summary-table th:first-child{text-align:left}.summary-value{font-weight:900;color:#153c30}.zero-value{color:#9aa39f}
@@ -1424,7 +1430,7 @@ window.changeTee=function(ci,teeNum){
       let cls='';
       if(ci<3&&tStrokes>0)cls=tStrokes>1?'team-stroke-hole2':'team-stroke-hole';
       else if(ci>=3){if(strokes>1)cls='team-stroke-hole2';else if(strokes>0)cls='team-stroke-hole';}
-      h+='<td class="sc'+(cls?' '+cls:'')+'">'+(tStrokes>0?'<span class="stroke-dots">'+('&bull;'.repeat(Math.min(tStrokes,2)))+'</span>':'')+'<input class="hole-input'+(isMirrored?' mirrored-input':'')+'" data-key="'+k+'" data-ci="'+ci+'" data-name="'+name+'" data-hi="'+hi+'" type="number" min="1" max="20" inputmode="numeric" value="'+displayed+'" '+(isMirrored?'readonly title="Copied automatically from '+mirrorSource+'"':'')+'/></td>';
+      h+='<td class="sc'+(cls?' '+cls:'')+'">'+(tStrokes>0?'<span class="stroke-dots">'+('&bull;'.repeat(Math.min(tStrokes,2)))+'</span>':'')+(ci>=3?'<span class="pts-badge" id="pts-'+ci+'-'+name+'-'+hi+'"></span>':'')+(ci>=3?'<span class="hl-badge" id="hl-'+ci+'-'+name+'-'+hi+'"></span>':'')+'<input class="hole-input'+(isMirrored?' mirrored-input':'')+'" data-key="'+k+'" data-ci="'+ci+'" data-name="'+name+'" data-hi="'+hi+'" type="number" min="1" max="20" inputmode="numeric" value="'+displayed+'" '+(isMirrored?'readonly title="Copied automatically from '+mirrorSource+'"':'')+'/></td>';
     });
     h+='</tr>';
   }
@@ -1892,7 +1898,7 @@ function build(){
       let cls2='';
       if(ci<3&&tStr>0)cls2=tStr>1?'team-stroke-hole2':'team-stroke-hole';
       else if(ci>=3){if(str>1)cls2='team-stroke-hole2';else if(str>0)cls2='team-stroke-hole';}
-      h+='<td class="sc'+(cls2?' '+cls2:'')+'">'+(tStr>0?'<span class="stroke-dots">'+('&bull;'.repeat(Math.min(tStr,2)))+'</span>':'')+'<input class="hole-input'+(isMir?' mirrored-input':'')+'" data-key="'+k2+'" data-ci="'+ci+'" data-name="'+nm+'" data-hi="'+hi2+'" type="number" min="1" max="20" inputmode="numeric" value="'+disp+'" '+(isMir?'readonly title="Copied automatically from '+ms+'"':'')+'/></td>';
+      h+='<td class="sc'+(cls2?' '+cls2:'')+'">'+(tStr>0?'<span class="stroke-dots">'+('&bull;'.repeat(Math.min(tStr,2)))+'</span>':'')+(ci>=3?'<span class="pts-badge" id="pts-'+ci+'-'+nm+'-'+hi2+'"></span>':'')+(ci>=3?'<span class="hl-badge" id="hl-'+ci+'-'+nm+'-'+hi2+'"></span>':'')+'<input class="hole-input'+(isMir?' mirrored-input':'')+'" data-key="'+k2+'" data-ci="'+ci+'" data-name="'+nm+'" data-hi="'+hi2+'" type="number" min="1" max="20" inputmode="numeric" value="'+disp+'" '+(isMir?'readonly title="Copied automatically from '+ms+'"':'')+'/></td>';
     });
     h+='</tr>';
   }
@@ -1943,11 +1949,27 @@ function update(){
       const x=effectiveScore(ci,name,h);
       if(x!==null){count++;if(h<9)out+=x;else inside+=x}
       const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+name+'"][data-hi="'+h+'"]');
-      if(inp){const td=inp.closest("td");td.classList.remove("score-eagle","score-birdie","score-bogey","score-double","hole-won","hole-tied");if(x!==null){const diff=x-c.pars[h];if(diff<=-2)td.classList.add("score-eagle");else if(diff===-1)td.classList.add("score-birdie");else if(diff===1)td.classList.add("score-bogey");else if(diff>=2)td.classList.add("score-double");}}}
+      if(inp){const td=inp.closest("td");td.classList.remove("score-eagle","score-birdie","score-bogey","score-double","hole-won","hole-tied","hole-low","hole-high");if(x!==null){const diff=x-c.pars[h];if(diff<=-2)td.classList.add("score-eagle");else if(diff===-1)td.classList.add("score-birdie");else if(diff===1)td.classList.add("score-bogey");else if(diff>=2)td.classList.add("score-double");}}}
     document.getElementById("out-"+ci+"-"+name).textContent=count?out:"—";
     document.getElementById("in-"+ci+"-"+name).textContent=count?inside:"—";
     document.getElementById("gross-"+ci+"-"+name).textContent=count?out+inside:"—";
   }));
+  // Stableford points badge per hole for courses 3-5
+  courses.forEach(function(c,ci){
+    if(ci<3)return;
+    workbookPlayerOrders[ci].forEach(function(name){
+      const p=playerInfo(c,name);
+      for(let h=0;h<18;h++){
+        const badge=document.getElementById("pts-"+ci+"-"+name+"-"+h);
+        if(!badge)continue;
+        const gross=effectiveScore(ci,name,h);
+        if(gross===null){badge.textContent="";return;}
+        const strokes=allocatedStrokes(p.chc,c.sis[h]);
+        const pts=Math.max(0,2+c.pars[h]-gross+strokes);
+        badge.textContent=pts;
+      }
+    });
+  });
   // Hole-winner marking
   courses.forEach(function(c,ci){
     const b=c.blockOrder;
@@ -1967,7 +1989,7 @@ function update(){
           const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+nm+'"][data-hi="'+h+'"]');
           if(!inp)return;
           const td=inp.closest("td");
-          td.classList.remove("hole-won","hole-tied");
+          td.classList.remove("hole-won","hole-tied","hole-low","hole-high");
           const inTeamA=teamA.includes(nm);
           if(tied)td.classList.add("hole-tied");
           else if(inTeamA&&winA)td.classList.add("hole-won");
@@ -1975,29 +1997,37 @@ function update(){
         });
       }
     } else {
-      // Courses 3-5: mark hole winners based on High/Low logic (full individual CHC)
+      // Courses 3-5: populate hl-badge per hole (H=won high point, L=won low point, HL=won both)
       for(let h=0;h<18;h++){
-        const nets=b.map(n=>{const s=effectiveScore(ci,n,h);return s===null?null:s-allocatedStrokes(playerInfo(c,n).chc,c.sis[h]);});
-        if(nets.some(x=>x===null))continue;
-        const nA=teamA.map(n=>nets[b.indexOf(n)]);
-        const nB=teamB.map(n=>nets[b.indexOf(n)]);
-        const worstA=Math.max(...nA),worstB=Math.max(...nB);
-        const bestA=Math.min(...nA),bestB=Math.min(...nB);
+        const grosses=b.map(n=>effectiveScore(ci,n,h));
+        const allIn=grosses.every(g=>g!==null);
+        // clear first
         workbookPlayerOrders[ci].forEach(function(nm){
           const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+nm+'"][data-hi="'+h+'"]');
           if(!inp)return;
-          const td=inp.closest("td");
-          td.classList.remove("hole-won","hole-tied");
+          inp.closest("td").classList.remove("hole-won","hole-tied","hole-low","hole-high");
+          const hlB=document.getElementById("hl-"+ci+"-"+nm+"-"+h);
+          if(hlB){hlB.textContent="";hlB.style.color="";}
+        });
+        if(!allIn)continue;
+        const nets=b.map((n,i)=>grosses[i]-allocatedStrokes(playerInfo(c,n).chc,c.sis[h]));
+        const nA=teamA.map(n=>nets[b.indexOf(n)]);
+        const nB=teamB.map(n=>nets[b.indexOf(n)]);
+        const worstA=Math.max(...nA), worstB=Math.max(...nB);
+        const bestA=Math.min(...nA), bestB=Math.min(...nB);
+        const highWinA=worstA<worstB, highWinB=worstB<worstA;
+        const lowWinA=bestA<bestB, lowWinB=bestB<bestA;
+        workbookPlayerOrders[ci].forEach(function(nm){
+          const inp=document.querySelector('[data-ci="'+ci+'"][data-name="'+nm+'"][data-hi="'+h+'"]');
+          if(!inp)return;
           const inA=teamA.includes(nm);
-          const net=nets[b.indexOf(nm)];
-          // High point: player whose team has lower worst net
-          const wonHigh=inA?(worstA<worstB):(worstB<worstA);
-          const tiedHigh=worstA===worstB;
-          // Low point: player whose team has lower best net
-          const wonLow=inA?(bestA<bestB):(bestB<bestA);
-          const tiedLow=bestA===bestB;
-          if(!tiedHigh&&wonHigh||!tiedLow&&wonLow) td.classList.add("hole-won");
-          else if((tiedHigh||tiedLow)&&!td.classList.contains("hole-won")) td.classList.add("hole-tied");
+          const wonHigh=inA?highWinA:highWinB;
+          const wonLow=inA?lowWinA:lowWinB;
+          const hlB=document.getElementById("hl-"+ci+"-"+nm+"-"+h);
+          if(!hlB)return;
+          if(wonHigh&&wonLow){hlB.textContent="2";hlB.style.color="#8B6914";}
+          else if(wonHigh||wonLow){hlB.textContent="1";hlB.style.color="#2e7d32";}
+          else{hlB.textContent="";hlB.style.color="";}
         });
       }
     }
